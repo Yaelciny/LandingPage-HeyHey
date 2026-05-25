@@ -2,41 +2,22 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { contactSection } from "@/data/content";
+import { contactSection } from "@/data/nat";
 
 export default function Contact() {
-  const { sectionLabel, info, closing } = contactSection;
+  const { sectionLabel, title, info, items, cta, closing } = contactSection;
 
   const detailsRef = useRef(null);
   const detailsInView = useInView(detailsRef, { once: true, amount: 0.2 });
 
-  const contactItems = [
-    { label: "Ubicación", value: info.address, sub: info.addressNote },
-    {
-      label: "Teléfono / WhatsApp",
-      value: info.phone,
-      href: `https://wa.me/${info.phone.replace(/\+/g, "")}`,
-    },
-    {
-      label: "Correo electrónico",
-      value: info.email,
-      href: `mailto:${info.email}`,
-    },
-    {
-      label: "Instagram",
-      value: info.instagramHandle,
-      href: info.instagram,
-    },
-  ];
-
   return (
     <section
       id="contacto"
-      className="relative overflow-hidden bg-neutral-950 py-28 text-white lg:py-36"
+      className="relative overflow-hidden bg-neutral-950 py-28 text-background lg:py-36"
     >
       {/* Animated background orb */}
       <motion.div
-        className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-white/[0.02] blur-3xl"
+        className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-background/[0.02] blur-3xl"
         animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
         transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
       />
@@ -61,13 +42,13 @@ export default function Contact() {
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
           className="mb-16 max-w-xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
         >
-          Hablemos de tu proyecto
+          {title}
         </motion.h2>
 
         <div className="grid gap-12 lg:grid-cols-2" ref={detailsRef}>
           {/* Contact items — staggered slide in */}
           <div className="space-y-8">
-            {contactItems.map((item, i) => (
+            {items.map((item, i) => (
               <motion.div
                 key={item.label}
                 initial={{ opacity: 0, x: -30 }}
@@ -86,7 +67,7 @@ export default function Contact() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block text-sm text-neutral-300 transition-colors hover:text-white"
+                    className="inline-block text-sm text-neutral-300 transition-colors hover:text-background"
                     whileHover={{ x: 6 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -124,18 +105,18 @@ export default function Contact() {
               href={`https://wa.me/${info.phone.replace(/\+/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative mt-8 inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-white px-8 py-3 text-sm font-medium tracking-wide"
+              className="group relative mt-8 inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-background px-8 py-3 text-sm font-medium tracking-wide"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
               {/* Sweep fill */}
-              <span className="absolute inset-0 -translate-x-full bg-white transition-transform duration-400 ease-out group-hover:translate-x-0" />
-              <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
-                Contáctanos
+              <span className="absolute inset-0 -translate-x-full bg-background transition-transform duration-400 ease-out group-hover:translate-x-0" />
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-foreground">
+                {cta}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="relative z-10 h-4 w-4 transition-colors duration-300 group-hover:text-black"
+                className="relative z-10 h-4 w-4 transition-colors duration-300 group-hover:text-foreground"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

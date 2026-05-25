@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { brandName, footerData, navLinks } from "@/data/content";
+import { brandName, footerData, navLinks } from "@/data/nat";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-neutral-100 bg-white py-12">
+    <footer className="border-t border-neutral-100 bg-background py-12">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-between">
           {/* Brand — slide up */}
@@ -15,7 +15,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <span className="text-lg font-bold tracking-tight text-black uppercase">
+            <span className="text-lg font-bold tracking-tight text-foreground uppercase">
               {brandName}
             </span>
             <p className="mt-1 text-xs text-neutral-400">{footerData.tagline}</p>
@@ -33,7 +33,7 @@ export default function Footer() {
               >
                 <motion.a
                   href={link.href}
-                  className="text-xs tracking-wide text-neutral-500 transition-colors hover:text-black"
+                  className="text-xs tracking-wide text-neutral-500 transition-colors hover:text-foreground"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >

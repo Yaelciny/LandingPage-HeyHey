@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { aboutSection } from "@/data/content";
+import { aboutSection } from "@/data/nat";
 
 export default function About() {
   const { sectionLabel, concept, description, valuesTitle, values, closing } =
@@ -20,7 +20,7 @@ export default function About() {
     <section
       id="nosotros"
       ref={sectionRef}
-      className="relative overflow-hidden bg-white py-28 lg:py-36"
+      className="relative overflow-hidden bg-background py-28 lg:py-36"
     >
       {/* Animated decorative line */}
       <motion.div
@@ -48,7 +48,7 @@ export default function About() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Word-by-word concept */}
           <div>
-            <h2 className="flex flex-wrap gap-x-3 text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl lg:text-5xl">
+            <h2 className="flex flex-wrap gap-x-3 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               {conceptWords.map((word, i) => (
                 <motion.span
                   key={i}
@@ -109,15 +109,15 @@ export default function About() {
               >
                 {/* Black sweep on hover */}
                 <motion.div
-                  className="absolute inset-0 bg-black"
+                  className="absolute inset-0 bg-foreground"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                   style={{ transformOrigin: "left" }}
                 />
                 <div className="relative flex items-start gap-3">
-                  <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full border border-neutral-300 transition-colors duration-300 group-hover:border-white group-hover:bg-white" />
-                  <span className="text-sm font-medium leading-snug text-neutral-700 transition-colors duration-300 group-hover:text-white">
+                  <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full border border-neutral-300 transition-colors duration-300 group-hover:border-background group-hover:bg-background" />
+                  <span className="text-sm font-medium leading-snug text-neutral-700 transition-colors duration-300 group-hover:text-background">
                     {value.label}
                   </span>
                 </div>
@@ -128,7 +128,7 @@ export default function About() {
 
         {/* Closing — typewriter character reveal */}
         <div ref={closingRef} className="mt-20 border-t border-neutral-100 pt-12">
-          <p className="text-center text-xl font-semibold tracking-tight text-black sm:text-2xl lg:text-3xl">
+          <p className="text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl lg:text-3xl">
             {closing.split("").map((char, i) => (
               <motion.span
                 key={i}

@@ -2,11 +2,18 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { projectsSection } from "@/data/content";
+import { projectsSection } from "@/data/nat";
 
 export default function Projects() {
-  const { sectionLabel, intro, processTitle, process, casesTitle, cases } =
-    projectsSection;
+  const {
+    sectionLabel,
+    intro,
+    processTitle,
+    process,
+    casesTitle,
+    cases,
+    viewProjectText,
+  } = projectsSection;
 
   const processRef = useRef(null);
   const processInView = useInView(processRef, { once: true, amount: 0.3 });
@@ -17,7 +24,7 @@ export default function Projects() {
   return (
     <section
       id="proyectos"
-      className="relative overflow-hidden bg-white py-28 lg:py-36"
+      className="relative overflow-hidden bg-background py-28 lg:py-36"
     >
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         {/* Label */}
@@ -33,7 +40,7 @@ export default function Projects() {
 
         {/* Intro word-by-word */}
         <div className="mb-20">
-          <h2 className="flex max-w-3xl flex-wrap gap-x-3 text-3xl font-bold leading-tight tracking-tight text-black sm:text-4xl lg:text-5xl">
+          <h2 className="flex max-w-3xl flex-wrap gap-x-3 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             {intro.split(" ").map((word, i) => (
               <motion.span
                 key={i}
@@ -82,7 +89,7 @@ export default function Projects() {
               >
                 <div className="mb-4 flex items-center gap-4">
                   <motion.span
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-black text-lg font-bold text-black transition-all duration-300 group-hover:bg-black group-hover:text-white"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-foreground text-lg font-bold text-foreground transition-all duration-300 group-hover:bg-foreground group-hover:text-background"
                     whileHover={{ scale: 1.15, rotate: 360 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   >
@@ -148,14 +155,14 @@ export default function Projects() {
                     {c.name.charAt(0)}
                   </motion.span>
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/70">
-                    <span className="text-xs font-medium tracking-[0.2em] text-white uppercase opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      Ver proyecto
+                  <div className="absolute inset-0 flex items-center justify-center bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/70">
+                    <span className="text-xs font-medium tracking-[0.2em] text-background uppercase opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      {viewProjectText}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h4 className="mb-1 text-lg font-bold tracking-tight text-black">
+                  <h4 className="mb-1 text-lg font-bold tracking-tight text-foreground">
                     {c.name}
                   </h4>
                   <p className="text-sm text-neutral-500">{c.tags}</p>

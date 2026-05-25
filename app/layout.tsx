@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { siteMetadata } from "@/data/nat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,25 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hey Hey Studio — Agencia de Marketing Creativo",
-  description:
-    "Transformamos ideas en marcas que se recuerdan. Branding, contenido y marketing digital con creatividad estratégica enfocada en resultados.",
-  keywords: [
-    "marketing creativo",
-    "branding",
-    "identidad de marca",
-    "diseño gráfico",
-    "redes sociales",
-    "marketing digital",
-    "Hey Hey Studio",
-    "León Guanajuato",
-  ],
+  title: siteMetadata.title,
+  description: siteMetadata.description,
+  keywords: siteMetadata.keywords,
   openGraph: {
-    title: "Hey Hey Studio — Agencia de Marketing Creativo",
-    description:
-      "Transformamos ideas en marcas que se recuerdan. Branding, contenido y marketing digital.",
-    type: "website",
-    locale: "es_MX",
+    title: siteMetadata.og.title,
+    description: siteMetadata.og.description,
+    type: siteMetadata.og.type,
+    locale: siteMetadata.og.locale,
   },
 };
 

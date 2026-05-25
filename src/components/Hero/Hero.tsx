@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { heroSection } from "@/data/content";
+import { heroSection } from "@/data/nat";
 
 const INTERVAL = 6000;
 
 export default function Hero() {
-  const { banners, distinctives } = heroSection;
+  const { banners, distinctives, scrollIndicatorText } = heroSection;
   const [current, setCurrent] = useState(0);
 
   const next = useCallback(
@@ -25,17 +25,17 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black text-white"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-foreground text-background"
     >
       {/* Animated background circles */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-white/[0.03]"
+          className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-background/[0.03]"
           animate={{ scale: [1, 1.15, 1], rotate: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -bottom-60 -left-60 h-[800px] w-[800px] rounded-full bg-white/[0.02]"
+          className="absolute -bottom-60 -left-60 h-[800px] w-[800px] rounded-full bg-background/[0.02]"
           animate={{ scale: [1, 1.1, 1], rotate: [0, -8, 0] }}
           transition={{ repeat: Infinity, duration: 25, ease: "easeInOut" }}
         />
@@ -43,7 +43,7 @@ export default function Hero() {
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute h-1 w-1 rounded-full bg-white/20"
+            className="absolute h-1 w-1 rounded-full bg-background/20"
             style={{ top: `${20 + i * 15}%`, left: `${10 + i * 18}%` }}
             animate={{ y: [0, -30, 0], opacity: [0.2, 0.6, 0.2] }}
             transition={{
@@ -120,7 +120,7 @@ export default function Hero() {
             >
               {i === current && (
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-white"
+                  className="absolute inset-0 rounded-full bg-background"
                   initial={{ scaleX: 0, transformOrigin: "left" }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: INTERVAL / 1000, ease: "linear" }}
@@ -132,7 +132,7 @@ export default function Hero() {
       </div>
 
       {/* Infinite marquee for distinctives */}
-      <div className="relative z-10 mt-16 w-full overflow-hidden border-t border-white/10">
+      <div className="relative z-10 mt-16 w-full overflow-hidden border-t border-background/10">
         <motion.div
           className="flex whitespace-nowrap py-6"
           animate={{ x: ["0%", "-50%"] }}
@@ -143,7 +143,7 @@ export default function Hero() {
               key={i}
               className="mx-8 flex shrink-0 items-center gap-3 text-xs tracking-[0.2em] text-neutral-400 uppercase sm:text-sm"
             >
-              <span className="inline-block h-1.5 w-1.5 rotate-45 bg-white/30" />
+              <span className="inline-block h-1.5 w-1.5 rotate-45 bg-background/30" />
               {d.label}
             </span>
           ))}
@@ -163,9 +163,9 @@ export default function Hero() {
           className="flex flex-col items-center gap-2"
         >
           <span className="text-[10px] tracking-[0.3em] text-neutral-500 uppercase">
-            Scroll
+            {scrollIndicatorText}
           </span>
-          <div className="h-8 w-[1px] bg-gradient-to-b from-white/40 to-transparent" />
+          <div className="h-8 w-[1px] bg-gradient-to-b from-background/40 to-transparent" />
         </motion.div>
       </motion.div>
     </section>
