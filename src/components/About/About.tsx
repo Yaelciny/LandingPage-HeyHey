@@ -128,19 +128,18 @@ export default function About() {
 
         {/* Closing — typewriter character reveal */}
         <div ref={closingRef} className="mt-20 border-t border-neutral-100 pt-12">
-          <p className="text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl lg:text-3xl">
-            {closing.split("").map((char, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0 }}
-                animate={closingInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ delay: i * 0.02, duration: 0.1 }}
-                className="inline-block"
-                style={char === " " ? { width: "0.3em" } : undefined}
-              >
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
+          <p className="text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl lg:text-3xl">            {closing.split("").map((char, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0 }}
+              animate={closingInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: i * 0.02, duration: 0.1 }}
+              className="inline-block"
+              style={char === " " ? { width: "0.3em" } : undefined}
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
           </p>
         </div>
       </div>

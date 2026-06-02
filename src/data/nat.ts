@@ -1,7 +1,7 @@
 // ============================================================
 // Hey Hey Studio — Landing Page Content Data
 // All text, images, icons, and elements are centralized here.
-// Components consume this data — no hardcoded text in JSX/TSX.
+// Components consume this data
 // ============================================================
 
 // Iconos
