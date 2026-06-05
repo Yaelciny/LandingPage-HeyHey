@@ -16,11 +16,11 @@ export default function Services() {
   return (
     <section
       id="servicios"
-      className="relative overflow-hidden bg-neutral-950 py-28 text-background lg:py-36"
+      className="relative overflow-hidden bg-[#f0f5fa] py-28 text-foreground lg:py-36"
     >
       {/* Floating orb */}
       <motion.div
-        className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-background/[0.02] blur-3xl"
+        className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-foreground/[0.03] blur-3xl"
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
         transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
       />
@@ -32,7 +32,7 @@ export default function Services() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-4 block text-xs font-medium tracking-[0.3em] text-neutral-500 uppercase"
+          className="mb-4 block text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
         >
           {sectionLabel}
         </motion.span>
@@ -51,7 +51,7 @@ export default function Services() {
         {/* Services grid */}
         <div
           ref={gridRef}
-          className="grid gap-[1px] bg-background/5 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-[1px] bg-foreground/5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {services.map((service, i) => (
             <motion.div
@@ -63,38 +63,38 @@ export default function Services() {
                 duration: 0.5,
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
-              whileHover={{ backgroundColor: "rgba(255,255,255,0.06)" }}
-              className="group relative bg-neutral-950 px-6 py-8 transition-colors"
+              whileHover={{ backgroundColor: "rgba(0,0,0,0.04)" }}
+              className="group relative bg-[#f0f5fa] px-6 py-8 transition-colors"
             >
               {/* Number */}
               <motion.span
-                className="mb-3 block font-mono text-xs text-neutral-600 transition-colors group-hover:text-background"
+                className="mb-3 block font-mono text-xs text-neutral-400 transition-colors group-hover:text-foreground"
                 whileHover={{ scale: 1.2, x: 4 }}
                 transition={{ duration: 0.2 }}
               >
                 {String(service.id).padStart(2, "0")}
               </motion.span>
 
-              <h3 className="text-sm font-medium leading-snug tracking-wide text-neutral-300 transition-colors group-hover:text-background">
+              <h3 className="text-sm font-medium leading-snug tracking-wide text-neutral-600 transition-colors group-hover:text-foreground">
                 {service.name}
               </h3>
 
               {/* Bottom line on hover */}
-              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-background transition-all duration-500 group-hover:w-full" />
+              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-foreground transition-all duration-500 group-hover:w-full" />
 
               {/* Corner accent on hover */}
-              <div className="absolute top-0 right-0 h-0 w-0 border-t-0 border-r-0 border-background/0 transition-all duration-300 group-hover:h-5 group-hover:w-5 group-hover:border-t-2 group-hover:border-r-2 group-hover:border-background/30" />
+              <div className="absolute top-0 right-0 h-0 w-0 border-t-0 border-r-0 border-foreground/0 transition-all duration-300 group-hover:h-5 group-hover:w-5 group-hover:border-t-2 group-hover:border-r-2 group-hover:border-foreground/30" />
             </motion.div>
           ))}
         </div>
 
         {/* Closing */}
-        <div ref={closingRef} className="mt-20 border-t border-background/10 pt-12">
+        <div ref={closingRef} className="mt-20 border-t border-foreground/10 pt-12">
           <motion.p
             initial={{ opacity: 0, scale: 0.9 }}
             animate={closingInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center text-lg font-medium tracking-tight text-neutral-400 sm:text-xl"
+            className="text-center text-lg font-medium tracking-tight text-neutral-500 sm:text-xl"
           >
             {closing}
           </motion.p>
