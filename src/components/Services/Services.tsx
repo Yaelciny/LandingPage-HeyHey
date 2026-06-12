@@ -16,13 +16,23 @@ export default function Services() {
   return (
     <section
       id="servicios"
-      className="relative overflow-hidden bg-[#f0f5fa] py-28 text-foreground lg:py-36"
+      className="relative overflow-hidden py-28 text-foreground lg:py-36"
+      style={{
+        background: "oklch(0.97 0.005 230)",
+      }}
     >
       {/* Floating orb */}
       <motion.div
-        className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-foreground/[0.03] blur-3xl"
+        className="pointer-events-none absolute top-0 right-0 h-[600px] w-[600px] rounded-full blur-3xl"
+        style={{ background: "oklch(0.85 0.04 220 / 0.15)" }}
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
         transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full blur-3xl"
+        style={{ background: "oklch(0.85 0.04 220 / 0.10)" }}
+        animate={{ x: [0, -20, 0], y: [0, 20, 0] }}
+        transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
       />
 
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
@@ -37,67 +47,107 @@ export default function Services() {
           {sectionLabel}
         </motion.span>
 
-        {/* Intro */}
+        {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="mb-16 max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
+          className="mb-4 max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
         >
           {intro}
         </motion.h2>
 
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="mb-16 text-sm text-neutral-400"
+        >
+          Elegimos cada herramienta con intención, cada decisión con propósito.
+        </motion.p>
+
         {/* Services grid */}
         <div
           ref={gridRef}
-          className="grid gap-[1px] bg-foreground/5 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {services.map((service, i) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, scale: 0.85, y: 20 }}
-              animate={gridInView ? { opacity: 1, scale: 1, y: 0 } : {}}
-              transition={{
-                delay: i * 0.06,
-                duration: 0.5,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              whileHover={{ backgroundColor: "rgba(0,0,0,0.04)" }}
-              className="group relative bg-[#f0f5fa] px-6 py-8 transition-colors"
-            >
-              {/* Number */}
-              <motion.span
-                className="mb-3 block font-mono text-xs text-neutral-400 transition-colors group-hover:text-foreground"
-                whileHover={{ scale: 1.2, x: 4 }}
-                transition={{ duration: 0.2 }}
+          {services.map((service, i) => {
+            const Icon = service.icon;
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={gridInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                transition={{
+                  delay: i * 0.05,
+                  duration: 0.5,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                whileHover={{ y: -3 }}
+                className="group relative overflow-hidden rounded-2xl bg-white/80 px-6 py-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-white hover:shadow-md"
               >
-                {String(service.id).padStart(2, "0")}
-              </motion.span>
+                {/* Hover accent line */}
+                <div className="absolute left-0 top-0 h-full w-[3px] scale-y-0 rounded-r-full bg-foreground transition-transform duration-300 group-hover:scale-y-100" />
 
-              <h3 className="text-sm font-medium leading-snug tracking-wide text-neutral-600 transition-colors group-hover:text-foreground">
-                {service.name}
-              </h3>
+                <div className="mb-4 flex items-center gap-3">
+                  {/* Number */}
+                  <span className="font-mono text-xs text-neutral-300 transition-colors group-hover:text-neutral-400">
+                    {String(service.id).padStart(2, "0")}
+                  </span>
+                  {/* Icon */}
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground/5 transition-colors duration-300 group-hover:bg-foreground/10">
+                    <Icon className="h-4 w-4 text-foreground/60 transition-colors duration-300 group-hover:text-foreground" />
+                  </div>
+                </div>
 
-              {/* Bottom line on hover */}
-              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-foreground transition-all duration-500 group-hover:w-full" />
-
-              {/* Corner accent on hover */}
-              <div className="absolute top-0 right-0 h-0 w-0 border-t-0 border-r-0 border-foreground/0 transition-all duration-300 group-hover:h-5 group-hover:w-5 group-hover:border-t-2 group-hover:border-r-2 group-hover:border-foreground/30" />
-            </motion.div>
-          ))}
+                <h3 className="text-sm font-semibold leading-snug tracking-wide text-neutral-700 transition-colors group-hover:text-foreground">
+                  {service.name}
+                </h3>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Closing */}
-        <div ref={closingRef} className="mt-20 border-t border-foreground/10 pt-12">
-          <motion.p
+        <div ref={closingRef} className="mt-20 border-t border-foreground/8 pt-12">
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={closingInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center text-lg font-medium tracking-tight text-neutral-500 sm:text-xl"
+            className="mx-auto max-w-2xl text-center"
           >
-            {closing}
-          </motion.p>
+            <p className="text-lg font-semibold tracking-tight text-foreground sm:text-xl lg:text-2xl">
+              {closing}
+            </p>
+            <motion.button
+              onClick={() => {
+                document
+                  .querySelector("#contacto")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:scale-105"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Comienza tu proyecto
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </motion.button>
+          </motion.div>
         </div>
       </div>
     </section>

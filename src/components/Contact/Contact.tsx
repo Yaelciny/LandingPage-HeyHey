@@ -3,133 +3,152 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { contactSection } from "@/data/nat";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Contact() {
-  const { sectionLabel, title, info, items, cta, closing } = contactSection;
+  const { sectionLabel, info, items, cta, closing } = contactSection;
 
-  const detailsRef = useRef(null);
-  const detailsInView = useInView(detailsRef, { once: true, amount: 0.2 });
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
 
   return (
     <section
       id="contacto"
-      className="relative overflow-hidden bg-background py-28 text-foreground lg:py-36"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-background py-28 lg:py-36"
     >
-      {/* Animated background orb */}
-      <motion.div
-        className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-foreground/[0.03] blur-3xl"
-        animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
-      />
-
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        {/* Label */}
+
+        {/* Section label */}
         <motion.span
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-4 block text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-10 block text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
         >
           {sectionLabel}
         </motion.span>
 
-        {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="mb-16 max-w-xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
-        >
-          {title}
-        </motion.h2>
-
-        <div className="grid gap-12 lg:grid-cols-2" ref={detailsRef}>
-          {/* Contact items — staggered slide in */}
-          <div className="space-y-8">
-            {items.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, x: -30 }}
-                animate={detailsInView ? { opacity: 1, x: 0 } : {}}
+        {/* ── GIANT HEADING — slide-up per line ── */}
+        <div className="mb-20 flex flex-col gap-1 overflow-hidden border-b border-neutral-100 pb-20">
+          {["Hablemos", "de tu", "proyecto."].map((line, i) => (
+            <div key={i} className="overflow-hidden">
+              <motion.h2
+                initial={{ y: "110%" }}
+                animate={isInView ? { y: "0%" } : {}}
                 transition={{
                   delay: i * 0.12,
-                  duration: 0.6,
-                  ease: "easeOut",
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94],
                 }}
+                className="text-[clamp(3.5rem,11vw,8rem)] font-black leading-[0.95] tracking-tighter text-foreground"
               >
-                <span className="mb-2 block text-xs font-medium tracking-[0.2em] text-neutral-400 uppercase">
-                  {item.label}
-                </span>
-                {item.href ? (
-                  <motion.a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-sm text-neutral-500 transition-colors hover:text-foreground"
-                    whileHover={{ x: 6 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {item.value} →
-                  </motion.a>
-                ) : (
-                  <>
-                    <p className="text-sm leading-relaxed text-neutral-600">
-                      {item.value}
-                    </p>
-                    {item.sub && (
-                      <p className="mt-1 text-xs text-neutral-400">
-                        {item.sub}
-                      </p>
-                    )}
-                  </>
-                )}
-              </motion.div>
-            ))}
+                {line}
+              </motion.h2>
+            </div>
+          ))}
+        </div>
+
+        {/* ── BOTTOM GRID ── */}
+        <div className="grid gap-16 lg:grid-cols-[1fr_auto]">
+
+          {/* Left — big typographic contact links */}
+          <div className="space-y-10">
+            {/* Phone — extra large */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
+            >
+              <span className="mb-2 block text-[10px] font-semibold tracking-[0.3em] text-neutral-400 uppercase">
+                WhatsApp
+              </span>
+              <a
+                href={`https://wa.me/${info.phone.replace(/\+/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-end gap-3 text-3xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-4xl lg:text-5xl"
+              >
+                {info.phone}
+                <ArrowUpRight className="mb-1 h-7 w-7 shrink-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </a>
+            </motion.div>
+
+            {/* Email — large */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.62, duration: 0.6, ease: "easeOut" }}
+            >
+              <span className="mb-2 block text-[10px] font-semibold tracking-[0.3em] text-neutral-400 uppercase">
+                Correo electrónico
+              </span>
+              <a
+                href={`mailto:${info.email}`}
+                className="group inline-flex items-end gap-3 text-2xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-3xl lg:text-4xl"
+              >
+                {info.email}
+                <ArrowUpRight className="mb-1 h-6 w-6 shrink-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </a>
+            </motion.div>
+
+            {/* Instagram */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.74, duration: 0.6, ease: "easeOut" }}
+            >
+              <span className="mb-2 block text-[10px] font-semibold tracking-[0.3em] text-neutral-400 uppercase">
+                Instagram
+              </span>
+              <a
+                href={info.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-end gap-3 text-xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-2xl lg:text-3xl"
+              >
+                {info.instagramHandle}
+                <ArrowUpRight className="mb-0.5 h-5 w-5 shrink-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </a>
+            </motion.div>
           </div>
 
-          {/* CTA */}
+          {/* Right — CTA card + address */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-col justify-center"
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
+            className="flex flex-col justify-between gap-12 lg:max-w-[280px]"
           >
-            <p className="text-2xl font-bold leading-snug tracking-tight sm:text-3xl lg:text-4xl">
-              {closing}
-            </p>
-
-            <motion.a
-              href={`https://wa.me/${info.phone.replace(/\+/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative mt-8 inline-flex w-fit items-center gap-2 overflow-hidden rounded-full border border-foreground px-8 py-3 text-sm font-medium tracking-wide"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {/* Sweep fill */}
-              <span className="absolute inset-0 -translate-x-full bg-foreground transition-transform duration-400 ease-out group-hover:translate-x-0" />
-              <span className="relative z-10 transition-colors duration-300 group-hover:text-background">
-                {cta}
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="relative z-10 h-4 w-4 transition-colors duration-300 group-hover:text-background"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+            {/* Closing phrase + CTA */}
+            <div>
+              <p className="mb-8 text-sm leading-relaxed text-neutral-500">
+                {closing}
+              </p>
+              <motion.a
+                href={`https://wa.me/${info.phone.replace(/\+/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 rounded-full bg-foreground px-7 py-4 text-sm font-bold text-background transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.18)] hover:scale-[1.04]"
+                whileTap={{ scale: 0.97 }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </motion.a>
+                {cta}
+                <ArrowUpRight className="h-4 w-4" />
+              </motion.a>
+            </div>
+
+            {/* Address */}
+            <div>
+              <span className="mb-2 block text-[10px] font-semibold tracking-[0.3em] text-neutral-400 uppercase">
+                Ubicación
+              </span>
+              <p className="text-xs leading-relaxed text-neutral-500">
+                {info.address}
+              </p>
+              <p className="mt-1 text-xs text-neutral-400">{info.addressNote}</p>
+            </div>
           </motion.div>
+
         </div>
       </div>
     </section>

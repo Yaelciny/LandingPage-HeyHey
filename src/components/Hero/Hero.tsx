@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { heroSection } from "@/data/nat";
+import { ChevronDown } from "lucide-react";
 
 const INTERVAL = 6000;
 
@@ -27,55 +28,79 @@ export default function Hero() {
       id="inicio"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-foreground text-background"
     >
-      {/* Animated background circles */}
+      {/* Animated gradient mesh background */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-background/[0.03]"
+          className="absolute -top-40 -right-40 h-[700px] w-[700px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)",
+          }}
           animate={{ scale: [1, 1.15, 1], rotate: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -bottom-60 -left-60 h-[800px] w-[800px] rounded-full bg-background/[0.02]"
+          className="absolute -bottom-60 -left-60 h-[800px] w-[800px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)",
+          }}
           animate={{ scale: [1, 1.1, 1], rotate: [0, -8, 0] }}
           transition={{ repeat: Infinity, duration: 25, ease: "easeInOut" }}
         />
         {/* Floating particles */}
-        {[...Array(5)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute h-1 w-1 rounded-full bg-background/20"
-            style={{ top: `${20 + i * 15}%`, left: `${10 + i * 18}%` }}
-            animate={{ y: [0, -30, 0], opacity: [0.2, 0.6, 0.2] }}
+            className="absolute rounded-full bg-background/20"
+            style={{
+              top: `${15 + i * 10}%`,
+              left: `${5 + i * 12}%`,
+              width: i % 3 === 0 ? 6 : 3,
+              height: i % 3 === 0 ? 6 : 3,
+            }}
+            animate={{ y: [0, -40, 0], opacity: [0.15, 0.5, 0.15] }}
             transition={{
               repeat: Infinity,
-              duration: 4 + i,
-              delay: i * 0.5,
+              duration: 5 + i,
+              delay: i * 0.6,
               ease: "easeInOut",
             }}
           />
         ))}
+
+        {/* Subtle grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
       </div>
 
       {/* Banner carousel */}
-      <div className="relative z-10 flex min-h-[60vh] w-full max-w-5xl flex-col items-center justify-center px-6 text-center">
+      <div className="relative z-10 flex min-h-[65vh] w-full max-w-5xl flex-col items-center justify-center px-6 text-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center gap-6"
           >
+
             {/* Word-by-word title reveal */}
-            <h1 className="flex flex-wrap justify-center gap-x-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-7xl">
+            <h1 className="flex flex-wrap justify-center gap-x-4 text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-7xl">
               {titleWords.map((word, i) => (
                 <motion.span
                   key={`${current}-${i}`}
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 60 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.15 + i * 0.12,
+                    delay: 0.2 + i * 0.1,
                     duration: 0.7,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
@@ -86,25 +111,58 @@ export default function Hero() {
               ))}
             </h1>
 
-            {/* Subtitle — slide from right */}
-            <motion.p
-              className="text-lg font-medium tracking-wide text-neutral-300 sm:text-xl md:text-2xl"
+            {/* Subtitle with accent line */}
+            <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
+              className="flex items-center gap-4"
             >
-              {banners[current].subtitle}
-            </motion.p>
+              <span className="hidden h-px w-8 bg-background/30 sm:block" />
+              <p className="text-base font-medium tracking-wide text-background/70 sm:text-lg md:text-xl">
+                {banners[current].subtitle}
+              </p>
+              <span className="hidden h-px w-8 bg-background/30 sm:block" />
+            </motion.div>
 
-            {/* Description — fade up */}
+            {/* Description */}
             <motion.p
-              className="max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg"
+              className="max-w-2xl text-sm leading-relaxed text-background/50 sm:text-base"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.6, ease: "easeOut" }}
             >
               {banners[current].description}
             </motion.p>
+
+            {/* CTA buttons */}
+            <motion.div
+              className="mt-4 flex flex-wrap items-center justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.6, ease: "easeOut" }}
+            >
+              <button
+                onClick={() => {
+                  document
+                    .querySelector("#contacto")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group relative overflow-hidden rounded-full bg-background px-7 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)]"
+              >
+                <span className="relative z-10">Habla con nosotros</span>
+              </button>
+              <button
+                onClick={() => {
+                  document
+                    .querySelector("#servicios")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="rounded-full border border-background/30 px-7 py-3 text-sm font-medium text-background/80 transition-all duration-300 hover:border-background/60 hover:text-background"
+              >
+                Ver servicios
+              </button>
+            </motion.div>
           </motion.div>
         </AnimatePresence>
 
@@ -115,7 +173,7 @@ export default function Hero() {
               key={i}
               onClick={() => setCurrent(i)}
               aria-label={`Ir a banner ${i + 1}`}
-              className="relative h-[3px] overflow-hidden rounded-full bg-neutral-700"
+              className="relative h-[3px] overflow-hidden rounded-full bg-background/20 transition-all duration-300"
               style={{ width: i === current ? 40 : 16 }}
             >
               {i === current && (
@@ -132,23 +190,41 @@ export default function Hero() {
       </div>
 
       {/* Infinite marquee for distinctives */}
-      <div className="relative z-10 mt-16 w-full overflow-hidden border-t border-background/10">
+      <div className="relative z-10 w-full overflow-hidden border-t border-background/10">
         <motion.div
-          className="flex whitespace-nowrap py-6"
+          className="flex whitespace-nowrap py-5"
           animate={{ x: ["0%", "-50%"] }}
           transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
         >
           {[...distinctives, ...distinctives].map((d, i) => (
             <span
               key={i}
-              className="mx-8 flex shrink-0 items-center gap-3 text-xs tracking-[0.2em] text-neutral-400 uppercase sm:text-sm"
+              className="mx-8 flex shrink-0 items-center gap-3 text-xs tracking-[0.2em] text-background/40 uppercase sm:text-sm"
             >
-              <span className="inline-block h-1.5 w-1.5 rotate-45 bg-background/30" />
+              <span className="inline-block h-1 w-1 rotate-45 bg-background/30" />
               {d.label}
             </span>
           ))}
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1.5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+      >
+        <span className="text-[10px] tracking-[0.3em] text-background/30 uppercase">
+          {scrollIndicatorText}
+        </span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+        >
+          <ChevronDown className="h-4 w-4 text-background/30" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

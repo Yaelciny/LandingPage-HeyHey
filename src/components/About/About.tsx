@@ -31,6 +31,9 @@ export default function About() {
         style={{ transformOrigin: "top" }}
       />
 
+      {/* Subtle background orb */}
+      <div className="pointer-events-none absolute right-0 top-1/4 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-foreground/[0.02] blur-3xl" />
+
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         {/* Section label */}
         <motion.div
@@ -93,7 +96,7 @@ export default function About() {
             {valuesTitle}
           </motion.h3>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
               <motion.div
                 key={value.label}
@@ -103,13 +106,12 @@ export default function About() {
                 transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
                 whileHover={{
                   y: -4,
-                  boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
                 }}
-                className="group relative cursor-default overflow-hidden rounded-xl border border-neutral-100 px-6 py-5"
+                className="group relative cursor-default overflow-hidden rounded-2xl border border-neutral-100 bg-white px-6 py-6 shadow-sm transition-shadow duration-300 hover:shadow-lg"
               >
                 {/* Black sweep on hover */}
                 <motion.div
-                  className="absolute inset-0 bg-foreground"
+                  className="absolute inset-0 rounded-2xl bg-foreground"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -128,18 +130,19 @@ export default function About() {
 
         {/* Closing — typewriter character reveal */}
         <div ref={closingRef} className="mt-20 border-t border-neutral-100 pt-12">
-          <p className="text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl lg:text-3xl">            {closing.split("").map((char, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0 }}
-              animate={closingInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: i * 0.02, duration: 0.1 }}
-              className="inline-block"
-              style={char === " " ? { width: "0.3em" } : undefined}
-            >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          ))}
+          <p className="text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl lg:text-4xl">
+            {closing.split("").map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={closingInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: i * 0.02, duration: 0.1 }}
+                className="inline-block"
+                style={char === " " ? { width: "0.3em" } : undefined}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </p>
         </div>
       </div>
