@@ -7,7 +7,11 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import { projectsSection } from "@/data/nat";
+import puzzleImg from "@/assets/otro/IMG_5674.png";
+import chessImg from "@/assets/otro/monochrome-pieces-chess-board-game.jpg.jpeg";
+import growthImg from "@/assets/otro/IMG_5671.png";
 
 // Paletas de gradiente oscuro para las tarjetas de casos de exito
 const CARD_GRADIENTS = [
@@ -55,37 +59,62 @@ export default function Projects() {
           {sectionLabel}
         </motion.span>
 
-        {/* Intro title */}
-        <div className="mb-6">
-          <h2 className="max-w-3xl text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            {["Proyectos que", "hablan", "por sí solos"].map((line, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{
-                  delay: i * 0.12,
-                  duration: 0.6,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                }}
-                className="block"
-              >
-                {line}
-              </motion.span>
-            ))}
-          </h2>
-        </div>
+        {/* Intro title + Imagen del puzzle (AGRANDADA) */}
+        <div className="mb-20 grid items-end gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <div className="mb-6">
+              <h2 className="max-w-3xl text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                {["Proyectos que", "hablan", "por sí solos"].map((line, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{
+                      delay: i * 0.12,
+                      duration: 0.6,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
+                    className="block"
+                  >
+                    {line}
+                  </motion.span>
+                ))}
+              </h2>
+            </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-          className="mb-20 max-w-xl text-sm leading-relaxed text-neutral-400 sm:text-base"
-        >
-          {intro}
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+              className="max-w-xl text-sm leading-relaxed text-neutral-400 sm:text-base"
+            >
+              {intro}
+            </motion.p>
+          </div>
+
+          {/* Imagen del puzzle — construir pieza por pieza (AGRANDADA y visible en movil) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, rotate: 3 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="col-span-12 mt-6 flex justify-center lg:col-span-4 lg:mt-0 lg:justify-end"
+          >
+            <div className="relative h-32 w-32 overflow-hidden rounded-3xl shadow-lg lg:h-52 lg:w-52">
+              <Image
+                src={puzzleImg}
+                alt="Manos armando un rompecabezas — proceso colaborativo"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 128px, 208px"
+              />
+              {/* Gradiente mas suave */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent" />
+            </div>
+          </motion.div>
+        </div>
 
         {/* Process */}
         <div className="mb-24" ref={processRef}>
@@ -163,8 +192,48 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Cases */}
-        <div ref={casesRef}>
+        {/* Cases — con imagen de ajedrez y arbol de crecimiento */}
+        <div ref={casesRef} className="relative">
+          {/* Imagen de ajedrez como fondo decorativo — estrategia ganadora (AGRANDADA y visible en movil) */}
+          <div className="pointer-events-none absolute -right-10 top-0 z-0">
+            <motion.div
+              initial={{ opacity: 0, rotate: 10 }}
+              whileInView={{ opacity: 1, rotate: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="relative h-64 w-64 overflow-hidden rounded-full opacity-[0.05] lg:h-96 lg:w-96 lg:opacity-20"
+            >
+              <Image
+                src={chessImg}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 256px, 384px"
+                aria-hidden="true"
+              />
+            </motion.div>
+          </div>
+
+          {/* Imagen del arbol de dinero — hacer crecer tu marca */}
+          <div className="pointer-events-none absolute -left-16 bottom-10 z-0">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+              className="relative h-48 w-40 overflow-hidden rounded-3xl opacity-[0.05] lg:h-64 lg:w-52 lg:opacity-30"
+            >
+              <Image
+                src={growthImg}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 160px, 208px"
+                aria-hidden="true"
+              />
+            </motion.div>
+          </div>
+
           <motion.h3
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -175,7 +244,7 @@ export default function Projects() {
             {casesTitle}
           </motion.h3>
 
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="relative grid gap-6 sm:grid-cols-3">
             {cases.map((c, i) => (
               <motion.div
                 key={c.name}
