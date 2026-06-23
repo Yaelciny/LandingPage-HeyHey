@@ -9,8 +9,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { aboutSection } from "@/data/nat";
-import aboutImg from "@/assets/otro/IMG_5662.png";
-import bulbManImg from "@/assets/otro/IMG_5666.png";
+import aboutImg from "@/assets/otro/destacada-multitud-azul.png";
+import bulbManImg from "@/assets/otro/hombre-foco-sentado.png";
 
 export default function About() {
   // Desestructurar datos de la seccion desde el archivo centralizado

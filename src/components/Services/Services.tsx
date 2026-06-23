@@ -9,8 +9,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { servicesSection } from "@/data/nat";
-import keyboardImg from "@/assets/otro/black-computer-keyboard (1).jpg.jpeg";
-import goldenImg from "@/assets/otro/IMG_5663.png";
+import keyboardImg from "@/assets/otro/teclado-computadora.jpg";
+import goldenImg from "@/assets/otro/destacado-multitud-amarillo.png";
 
 export default function Services() {
   // Desestructurar datos de servicios desde el archivo centralizado

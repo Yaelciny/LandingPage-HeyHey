@@ -9,9 +9,9 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { projectsSection } from "@/data/nat";
-import puzzleImg from "@/assets/otro/IMG_5674.png";
-import chessImg from "@/assets/otro/monochrome-pieces-chess-board-game.jpg.jpeg";
-import growthImg from "@/assets/otro/IMG_5671.png";
+import puzzleImg from "@/assets/otro/manos-armando-rompecabezas.png";
+import chessImg from "@/assets/otro/piezas-ajedrez.jpg";
+import growthImg from "@/assets/otro/regando-arbol-dinero.png";
 
 // Paletas de gradiente oscuro para las tarjetas de casos de exito
 const CARD_GRADIENTS = [
