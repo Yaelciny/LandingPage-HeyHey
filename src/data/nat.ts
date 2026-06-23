@@ -1,10 +1,11 @@
 // ============================================================
-// Hey Hey Studio — Landing Page Content Data
-// All text, images, icons, and elements are centralized here.
-// Components consume this data
+// Hey Hey Studio — Archivo central de datos de la Landing Page
+// Todo el contenido (textos, imagenes, iconos, servicios)
+// esta centralizado aqui para facilitar su edicion.
+// Los componentes consumen estos datos directamente.
 // ============================================================
 
-// Iconos
+// Iconos de la libreria Lucide utilizados en servicios y tarjetas
 import {
   Zap,
   Briefcase,
@@ -25,7 +26,9 @@ import {
   Star,
   type LucideIcon,
 } from "lucide-react";
+// Tipo para imagenes estaticas importadas por Next.js
 import { StaticImageData } from "next/image";
+// Imagenes ilustrativas para cada tarjeta de servicio
 import imgService01 from '@/assets/servicios/service01.png';
 import imgService02 from '@/assets/servicios/service02.png';
 import imgService03 from '@/assets/servicios/service03.png';
@@ -38,7 +41,10 @@ import imgService09 from '@/assets/servicios/service09.png';
 import imgService10 from '@/assets/servicios/service10.png';
 import imgService11 from '@/assets/servicios/service11.png';
 import imgService12 from '@/assets/servicios/service12.png';
-// Interfaces
+// ============================================================
+// INTERFACES — Definen la estructura de cada seccion del sitio.
+// Cualquier dato nuevo debe seguir estas interfaces.
+// ============================================================
 export interface Brand {
   name: string;
   suffix: string;
@@ -177,7 +183,10 @@ export interface SiteData {
   scrollIndicatorText: string;
 }
 
-// === DATOS EDITABLES ===
+// ============================================================
+// DATOS EDITABLES — Modificar aqui para cambiar el contenido
+// visible en la pagina sin tocar los componentes.
+// ============================================================
 
 export const brand: Brand = {
   name: "Hey Hey",
@@ -185,6 +194,7 @@ export const brand: Brand = {
   full: "Hey Hey Studio",
 };
 
+// Enlaces de navegacion — el href debe coincidir con el id de cada seccion
 export const navLinks: NavLink[] = [
   { label: "Inicio", href: "#inicio" },
   { label: "Nosotros", href: "#nosotros" },
@@ -193,6 +203,7 @@ export const navLinks: NavLink[] = [
   { label: "Contacto", href: "#contacto" },
 ];
 
+// Metadatos SEO — Importante para posicionamiento en buscadores y redes sociales
 export const siteMetadata = {
   title: "Hey Hey Studio — Agencia de Marketing Creativo",
   description:
@@ -207,6 +218,7 @@ export const siteMetadata = {
     "Hey Hey Studio",
     "León Guanajuato",
   ],
+  // Open Graph — datos que se muestran al compartir en Facebook, WhatsApp, etc.
   og: {
     title: "Hey Hey Studio — Agencia de Marketing Creativo",
     description:
@@ -216,7 +228,8 @@ export const siteMetadata = {
   },
 };
 
-// Objeto principal que agrupa todos los datos del sitio
+// Objeto principal — Agrupa TODOS los datos del sitio.
+// Cada propiedad alimenta una seccion distinta de la landing page.
 export const siteData: SiteData = {
   brand,
   siteName: brand.full,
@@ -429,13 +442,20 @@ export const siteData: SiteData = {
   scrollIndicatorText: "Scroll",
 };
 
-// Exports individuales para compatibilidad con componentes existentes
+// ============================================================
+// EXPORTS INDIVIDUALES — Cada componente importa solo su seccion.
+// Estos objetos transforman siteData al formato que espera
+// cada componente, evitando acoplamientos innecesarios.
+// ============================================================
+
+// Datos para el carrusel principal (Hero)
 export const heroSection = {
   banners: siteData.banners,
   distinctives: siteData.features.map((f) => ({ label: f.title })),
   scrollIndicatorText: siteData.scrollIndicatorText,
 };
 
+// Datos para la seccion "Sobre Nosotros"
 export const aboutSection = {
   sectionLabel: "Sobre Nosotros",
   concept: siteData.about.description.split(". ")[0] + ".",
@@ -446,6 +466,7 @@ export const aboutSection = {
     "En Hey Hey Studio no solo diseñamos... construimos marcas que dejan huella.",
 };
 
+// Datos para la grilla de servicios
 export const servicesSection = {
   sectionLabel: siteData.services.subtitle,
   intro: siteData.services.intro,
@@ -454,6 +475,7 @@ export const servicesSection = {
   image: siteData.services.image,
 };
 
+// Datos para la seccion de proyectos y proceso de trabajo
 export const projectsSection = {
   sectionLabel: siteData.projects.subtitle,
   intro: siteData.projects.intro,
@@ -467,6 +489,7 @@ export const projectsSection = {
   viewProjectText: siteData.projects.viewProjectText,
 };
 
+// Datos de contacto — telefono, correo, Instagram y direccion
 export const contactSection = {
   sectionLabel: siteData.contact.title,
   title: siteData.contact.subtitle,
@@ -483,6 +506,7 @@ export const contactSection = {
   closing: siteData.contact.closing,
 };
 
+// Datos del pie de pagina
 export const footerData = {
   copyright: siteData.footer.copyright,
   tagline: siteData.footer.tagline,

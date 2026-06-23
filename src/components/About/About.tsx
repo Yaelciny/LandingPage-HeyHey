@@ -1,3 +1,8 @@
+// ============================================================
+// About — Seccion "Sobre Nosotros".
+// Incluye concepto palabra por palabra, descripcion,
+// tarjetas de valores con hover y cierre con efecto typewriter.
+// ============================================================
 "use client";
 
 import { useRef } from "react";
@@ -5,9 +10,11 @@ import { motion, useInView } from "framer-motion";
 import { aboutSection } from "@/data/nat";
 
 export default function About() {
+  // Desestructurar datos de la seccion desde el archivo centralizado
   const { sectionLabel, concept, description, valuesTitle, values, closing } =
     aboutSection;
 
+  // Refs para detectar cuando la seccion es visible y activar animaciones
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
@@ -22,7 +29,7 @@ export default function About() {
       ref={sectionRef}
       className="relative overflow-hidden bg-background py-28 lg:py-36"
     >
-      {/* Animated decorative line */}
+      {/* Linea decorativa animada que aparece al hacer scroll */}
       <motion.div
         className="pointer-events-none absolute top-0 left-1/2 h-28 w-[1px] -translate-x-1/2 bg-gradient-to-b from-transparent via-neutral-200 to-transparent"
         initial={{ scaleY: 0 }}
@@ -31,7 +38,7 @@ export default function About() {
         style={{ transformOrigin: "top" }}
       />
 
-      {/* Subtle background orb */}
+      {/* Circulo difuminado decorativo de fondo */}
       <div className="pointer-events-none absolute right-0 top-1/4 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-foreground/[0.02] blur-3xl" />
 
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
@@ -49,7 +56,7 @@ export default function About() {
         </motion.div>
 
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          {/* Word-by-word concept */}
+          {/* Concepto principal con animacion palabra por palabra */}
           <div>
             <h2 className="flex flex-wrap gap-x-3 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               {conceptWords.map((word, i) => (
@@ -109,7 +116,7 @@ export default function About() {
                 }}
                 className="group relative cursor-default overflow-hidden rounded-2xl border border-neutral-100 bg-white px-6 py-6 shadow-sm transition-shadow duration-300 hover:shadow-lg"
               >
-                {/* Black sweep on hover */}
+                {/* Efecto de barrido negro al pasar el mouse */}
                 <motion.div
                   className="absolute inset-0 rounded-2xl bg-foreground"
                   initial={{ scaleX: 0 }}
@@ -128,7 +135,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* Closing — typewriter character reveal */}
+        {/* Frase de cierre con efecto de escritura caracter por caracter */}
         <div ref={closingRef} className="mt-20 border-t border-neutral-100 pt-12">
           <p className="text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl lg:text-4xl">
             {closing.split("").map((char, i) => (

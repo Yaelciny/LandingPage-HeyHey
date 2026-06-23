@@ -1,3 +1,8 @@
+// ============================================================
+// Hero — Seccion principal con carrusel de banners animados.
+// Incluye fondo con particulas, titulo palabra por palabra,
+// botones CTA y marquee infinito de diferenciadores.
+// ============================================================
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
@@ -5,22 +10,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import { heroSection } from "@/data/nat";
 import { ChevronDown } from "lucide-react";
 
+// Intervalo del carrusel en milisegundos (6 segundos por banner)
 const INTERVAL = 6000;
 
 export default function Hero() {
+  // Desestructurar los datos del hero desde el archivo centralizado
   const { banners, distinctives, scrollIndicatorText } = heroSection;
   const [current, setCurrent] = useState(0);
 
+  // Avanzar al siguiente banner de forma ciclica
   const next = useCallback(
     () => setCurrent((prev) => (prev + 1) % banners.length),
     [banners.length]
   );
 
+  // Temporizador que cambia el banner automaticamente
   useEffect(() => {
     const timer = setInterval(next, INTERVAL);
     return () => clearInterval(timer);
   }, [next]);
 
+  // Separar el titulo en palabras para la animacion palabra por palabra
   const titleWords = banners[current].title.split(" ");
 
   return (
@@ -28,7 +38,7 @@ export default function Hero() {
       id="inicio"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-foreground text-background"
     >
-      {/* Animated gradient mesh background */}
+      {/* Fondo animado con gradientes, particulas flotantes y cuadricula */}
       <div className="pointer-events-none absolute inset-0">
         <motion.div
           className="absolute -top-40 -right-40 h-[700px] w-[700px] rounded-full"
@@ -80,7 +90,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Banner carousel */}
+      {/* Contenido principal del carrusel con animacion de entrada/salida */}
       <div className="relative z-10 flex min-h-[65vh] w-full max-w-5xl flex-col items-center justify-center px-6 text-center">
         <AnimatePresence mode="wait">
           <motion.div
@@ -92,7 +102,7 @@ export default function Hero() {
             className="flex flex-col items-center gap-6"
           >
 
-            {/* Word-by-word title reveal */}
+            {/* Titulo con efecto de revelacion palabra por palabra */}
             <h1 className="flex flex-wrap justify-center gap-x-4 text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-7xl">
               {titleWords.map((word, i) => (
                 <motion.span
@@ -111,7 +121,7 @@ export default function Hero() {
               ))}
             </h1>
 
-            {/* Subtitle with accent line */}
+            {/* Subtitulo con linea decorativa a los lados */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -135,7 +145,7 @@ export default function Hero() {
               {banners[current].description}
             </motion.p>
 
-            {/* CTA buttons */}
+            {/* Botones de accion — navegan hacia Contacto y Servicios */}
             <motion.div
               className="mt-4 flex flex-wrap items-center justify-center gap-4"
               initial={{ opacity: 0, y: 20 }}
@@ -166,7 +176,7 @@ export default function Hero() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Carousel indicators with progress */}
+        {/* Indicadores del carrusel con barra de progreso animada */}
         <div className="mt-12 flex items-center gap-3">
           {banners.map((_, i) => (
             <button
@@ -189,7 +199,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Infinite marquee for distinctives */}
+      {/* Marquee infinito — desplazamiento continuo con los diferenciadores */}
       <div className="relative z-10 w-full overflow-hidden border-t border-background/10">
         <motion.div
           className="flex whitespace-nowrap py-5"
@@ -207,24 +217,6 @@ export default function Hero() {
           ))}
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1.5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        <span className="text-[10px] tracking-[0.3em] text-background/30 uppercase">
-          {scrollIndicatorText}
-        </span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-        >
-          <ChevronDown className="h-4 w-4 text-background/30" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

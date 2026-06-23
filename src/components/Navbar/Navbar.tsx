@@ -1,3 +1,8 @@
+// ============================================================
+// Navbar — Barra de navegacion fija con efecto de transparencia.
+// Incluye menu hamburguesa animado para movil,
+// overlay oscuro y scroll suave a cada seccion.
+// ============================================================
 "use client";
 
 import { useState, useEffect } from "react";
@@ -8,12 +13,14 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  // Detectar scroll para aplicar fondo semitransparente al header
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Bloquear scroll del body cuando el menu movil esta abierto
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -25,6 +32,7 @@ export default function Navbar() {
     };
   }, [open]);
 
+  // Cerrar menu y hacer scroll suave a la seccion indicada
   const handleNav = (href: string) => {
     setOpen(false);
     const el = document.querySelector(href);
@@ -92,7 +100,7 @@ export default function Navbar() {
               Contáctanos
             </button>
 
-            {/* Hamburger */}
+            {/* Boton hamburguesa con animacion de transformacion a X */}
             <button
               onClick={() => setOpen(!open)}
               className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
@@ -146,7 +154,7 @@ export default function Navbar() {
         </AnimatePresence>
       </motion.header>
 
-      {/* Overlay */}
+      {/* Overlay oscuro que cierra el menu al tocarlo (solo movil) */}
       <AnimatePresence>
         {open && (
           <motion.div

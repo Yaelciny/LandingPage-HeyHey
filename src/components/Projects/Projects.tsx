@@ -1,10 +1,15 @@
+// ============================================================
+// Projects — Seccion de proyectos y proceso de trabajo.
+// Muestra el flujo de 4 pasos con lineas conectoras
+// y tarjetas de casos de exito con efecto hover premium.
+// ============================================================
 "use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { projectsSection } from "@/data/nat";
 
-// Brand-inspired gradient palettes for case study cards
+// Paletas de gradiente oscuro para las tarjetas de casos de exito
 const CARD_GRADIENTS = [
   "from-slate-900 via-slate-800 to-slate-700",
   "from-zinc-900 via-zinc-800 to-stone-700",
@@ -12,6 +17,7 @@ const CARD_GRADIENTS = [
 ];
 
 export default function Projects() {
+  // Desestructurar datos de proyectos desde el archivo centralizado
   const {
     sectionLabel,
     intro,
@@ -22,6 +28,7 @@ export default function Projects() {
     viewProjectText,
   } = projectsSection;
 
+  // Refs para animar el proceso y los casos solo cuando son visibles
   const processRef = useRef(null);
   const processInView = useInView(processRef, { once: true, amount: 0.3 });
 
@@ -107,7 +114,7 @@ export default function Projects() {
                 }}
                 className="group relative rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
-                {/* Step number badge */}
+                {/* Numero del paso con animacion de rotacion al hover */}
                 <div className="mb-5 flex items-center justify-between">
                   <motion.span
                     className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-foreground text-base font-bold text-foreground transition-all duration-300 group-hover:bg-foreground group-hover:text-background"
@@ -133,7 +140,7 @@ export default function Projects() {
                   )}
                 </div>
 
-                {/* Connector line (lg only) */}
+                {/* Linea conectora entre pasos (solo en pantallas grandes) */}
                 {i < process.length - 1 && (
                   <motion.div
                     className="absolute right-0 top-[3.5rem] hidden h-[1px] w-8 translate-x-full bg-neutral-200 lg:block"
@@ -185,7 +192,7 @@ export default function Projects() {
                 }}
                 className="group relative overflow-hidden rounded-2xl"
               >
-                {/* Dark gradient image placeholder */}
+                {/* Gradiente oscuro como fondo de la tarjeta */}
                 <div
                   className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]}`}
                 >
@@ -208,7 +215,7 @@ export default function Projects() {
                     }}
                   />
 
-                  {/* Hover overlay */}
+                  {/* Overlay que aparece al pasar el mouse con texto "Ver proyecto" */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/0 transition-colors duration-400 group-hover:bg-black/50">
                     <span className="text-xs font-semibold tracking-[0.3em] text-white uppercase opacity-0 transition-all duration-300 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
                       {viewProjectText}

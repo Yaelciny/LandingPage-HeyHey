@@ -1,3 +1,8 @@
+// ============================================================
+// Services — Grilla de servicios con imagenes ilustrativas.
+// Cada tarjeta muestra una imagen o icono de respaldo,
+// con animaciones de entrada y hover premium.
+// ============================================================
 "use client";
 
 import { useRef } from "react";
@@ -6,8 +11,10 @@ import Image from "next/image";
 import { servicesSection } from "@/data/nat";
 
 export default function Services() {
+  // Desestructurar datos de servicios desde el archivo centralizado
   const { sectionLabel, intro, services, closing } = servicesSection;
 
+  // Refs para activar animaciones solo cuando la grilla y el cierre son visibles
   const gridRef = useRef(null);
   const gridInView = useInView(gridRef, { once: true, amount: 0.1 });
 
@@ -19,7 +26,7 @@ export default function Services() {
       id="servicios"
       className="relative overflow-hidden bg-foreground py-28 text-background lg:py-36"
     >
-      {/* Ambient glow orbs */}
+      {/* Orbes de brillo ambiental — efecto decorativo de fondo */}
       <motion.div
         className="pointer-events-none absolute -top-40 -left-40 h-[700px] w-[700px] rounded-full blur-[120px]"
         style={{ background: "oklch(0.55 0.12 220 / 0.12)" }}
@@ -33,7 +40,7 @@ export default function Services() {
         transition={{ repeat: Infinity, duration: 25, ease: "easeInOut" }}
       />
 
-      {/* Subtle grid pattern */}
+      {/* Patron de cuadricula sutil de fondo */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
@@ -75,7 +82,7 @@ export default function Services() {
           Elegimos cada herramienta con intención, cada decisión con propósito.
         </motion.p>
 
-        {/* Services grid */}
+        {/* Grilla de tarjetas de servicios */}
         <div
           ref={gridRef}
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
@@ -96,10 +103,10 @@ export default function Services() {
                 whileHover={{ y: -6, scale: 1.02 }}
                 className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/[0.15] hover:bg-white/[0.08]"
               >
-                {/* Hover gradient glow */}
+                {/* Brillo con gradiente al pasar el mouse */}
                 <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/[0.08] via-transparent to-white/[0.04] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                {/* Service illustration */}
+                {/* Imagen ilustrativa del servicio o icono de respaldo */}
                 <div className="relative mb-5 flex items-start justify-between">
                   <div className="relative h-16 w-20 shrink-0">
                     {service.image ? (
@@ -124,14 +131,14 @@ export default function Services() {
                   {service.name}
                 </h3>
 
-                {/* Bottom accent bar */}
+                {/* Barra de acento inferior que se expande en hover */}
                 <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-white/40 via-white/20 to-transparent transition-all duration-700 group-hover:w-full" />
               </motion.div>
             );
           })}
         </div>
 
-        {/* Closing */}
+        {/* Seccion de cierre con frase y boton CTA */}
         <div ref={closingRef} className="mt-20 border-t border-white/[0.08] pt-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

@@ -1,3 +1,8 @@
+// ============================================================
+// Contact — Seccion de contacto con heading gigante animado.
+// Muestra telefono, correo e Instagram como enlaces grandes,
+// mas un boton CTA que redirige a WhatsApp.
+// ============================================================
 "use client";
 
 import { useRef } from "react";
@@ -6,8 +11,10 @@ import { contactSection } from "@/data/nat";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Contact() {
+  // Desestructurar los datos de contacto desde el archivo centralizado
   const { sectionLabel, info, items, cta, closing } = contactSection;
 
+  // Ref para detectar visibilidad y disparar todas las animaciones
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
 
@@ -29,7 +36,7 @@ export default function Contact() {
           {sectionLabel}
         </motion.span>
 
-        {/* ── GIANT HEADING — slide-up per line ── */}
+        {/* Heading gigante — cada linea desliza desde abajo */}
         <div className="mb-20 flex flex-col gap-1 overflow-hidden border-b border-neutral-100 pb-20">
           {["Hablemos", "de tu", "proyecto."].map((line, i) => (
             <div key={i} className="overflow-hidden">
@@ -49,10 +56,10 @@ export default function Contact() {
           ))}
         </div>
 
-        {/* ── BOTTOM GRID ── */}
+        {/* Grilla inferior — links de contacto a la izquierda, CTA a la derecha */}
         <div className="grid gap-16 lg:grid-cols-[1fr_auto]">
 
-          {/* Left — big typographic contact links */}
+          {/* Izquierda — enlaces grandes tipograficos hacia WhatsApp, correo e Instagram */}
           <div className="space-y-10">
             {/* Phone — extra large */}
             <motion.div
@@ -113,7 +120,7 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* Right — CTA card + address */}
+          {/* Derecha — frase de cierre, boton CTA y direccion fisica */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}

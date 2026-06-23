@@ -1,8 +1,16 @@
+/* ============================================================
+   Estilos globales — Hey Hey Studio Landing Page
+   Incluye: tema de colores, paleta de marca, modo oscuro,
+   estilos base, utilidades y animaciones reutilizables.
+   ============================================================ */
+
+/* Imports de Tailwind CSS y animaciones */
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
+/* Tema personalizado — tokens de color, bordes y tipografia */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,11 +57,11 @@
 :root {
   --radius: 0.625rem;
 
-  /* HeyHey Brand Palette — Deep Navy + Steel Blue + White */
-  /* background = deep navy (used as page bg in dark sections) */
-  /* foreground = white (used as text on dark bg) */
-  --background: oklch(0.985 0 0);          /* off-white for light surfaces */
-  --foreground: oklch(0.18 0.04 240);      /* deep navy for text on light */
+  /* Paleta de marca HeyHey — Navy profundo + Azul acero + Blanco */
+  /* background = blanco roto para superficies claras */
+  /* foreground = navy profundo para texto sobre fondo claro */
+  --background: oklch(0.985 0 0);          /* blanco roto */
+  --foreground: oklch(0.18 0.04 240);      /* navy profundo */
   --card: oklch(0.985 0 0);
   --card-foreground: oklch(0.18 0.04 240);
   --popover: oklch(0.985 0 0);
@@ -84,14 +92,15 @@
   --sidebar-border: oklch(0.88 0.02 230);
   --sidebar-ring: oklch(0.55 0.08 220);
 
+  /* Sombras personalizadas con el tono navy de la marca */
   --shadow-sm: 0 2px 8px -2px oklch(0.18 0.04 240 / 0.10);
   --shadow-md: 0 8px 24px -8px oklch(0.18 0.04 240 / 0.15);
   --shadow-lg: 0 16px 48px -12px oklch(0.18 0.04 240 / 0.20);
   --shadow-primary: 0 8px 32px -8px oklch(0.18 0.04 240 / 0.40);
 }
 
+/* Modo oscuro — la paleta real de la marca del logo */
 .dark {
-  /* HeyHey Brand — Dark mode = the actual brand palette from the logo */
   --background: oklch(0.18 0.04 240);      /* deep navy #0d1b2e */
   --foreground: oklch(0.97 0 0);           /* white */
   --card: oklch(0.22 0.04 238);
@@ -125,6 +134,7 @@
   --sidebar-ring: oklch(0.60 0.10 215);
 }
 
+/* Estilos base aplicados a todos los elementos */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -145,6 +155,7 @@
   }
 }
 
+/* Utilidad de contenedor centrado con padding responsivo */
 @utility container {
   @apply mx-auto px-4 md:px-6 max-w-7xl;
 }
@@ -165,6 +176,13 @@
   @apply flex items-center justify-center bg-primary/10 text-primary;
 }
 
+/* ============================================================
+   Animaciones reutilizables (keyframes)
+   float: efecto de flotacion suave
+   slideUp: entrada deslizando hacia arriba
+   fadeIn: aparicion gradual
+   scaleIn: aparicion con escala
+   ============================================================ */
 @keyframes float {
   0%,
   100% {

@@ -1,3 +1,8 @@
+// ============================================================
+// Footer — Pie de pagina con marca, navegacion y datos de contacto.
+// Incluye iconos sociales animados, links con linea
+// decorativa y divisor animado antes del copyright.
+// ============================================================
 "use client";
 
 import { motion } from "framer-motion";
@@ -5,6 +10,7 @@ import { brandName, footerData, navLinks } from "@/data/nat";
 import { Mail, Phone, Share2 } from "lucide-react";
 
 export default function Footer() {
+  // Funcion de scroll suave reutilizada para los links de navegacion
   const handleNav = (href: string) => {
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
@@ -12,7 +18,7 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t border-white/5 bg-black py-16">
-      {/* Subtle grid */}
+      {/* Patron de cuadricula sutil sobre fondo negro */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
@@ -42,7 +48,7 @@ export default function Footer() {
               estrategia.
             </p>
 
-            {/* Social icons */}
+            {/* Iconos de redes sociales con animacion de hover */}
             <div className="mt-6 flex items-center gap-3">
               {[
                 {
@@ -131,7 +137,7 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* Animated divider */}
+        {/* Linea divisora animada que se expande desde el centro */}
         <motion.div
           className="mt-12 h-px bg-white/8"
           initial={{ scaleX: 0 }}
