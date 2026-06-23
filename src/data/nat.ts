@@ -25,7 +25,19 @@ import {
   Star,
   type LucideIcon,
 } from "lucide-react";
-
+import { StaticImageData } from "next/image";
+import imgService01 from '@/assets/servicios/service01.png';
+import imgService02 from '@/assets/servicios/service02.png';
+import imgService03 from '@/assets/servicios/service03.png';
+import imgService04 from '@/assets/servicios/service04.png';
+import imgService05 from '@/assets/servicios/service05.png';
+import imgService06 from '@/assets/servicios/service06.png';
+import imgService07 from '@/assets/servicios/service07.png';
+import imgService08 from '@/assets/servicios/service08.png';
+import imgService09 from '@/assets/servicios/service09.png';
+import imgService10 from '@/assets/servicios/service10.png';
+import imgService11 from '@/assets/servicios/service11.png';
+import imgService12 from '@/assets/servicios/service12.png';
 // Interfaces
 export interface Brand {
   name: string;
@@ -74,6 +86,7 @@ export interface ServiceItem {
   id: number;
   name: string;
   icon: LucideIcon;
+  image?: StaticImageData;
 }
 
 export interface ServicesSection {
@@ -82,6 +95,7 @@ export interface ServicesSection {
   intro: string;
   items: ServiceItem[];
   closing: string;
+  image?: StaticImageData;
 }
 
 export interface WorkflowStep {
@@ -310,20 +324,21 @@ export const siteData: SiteData = {
     title: "Soluciones creativas para tu marca",
     intro: "Soluciones creativas diseñadas para que tu marca destaque.",
     items: [
-      { id: 1, name: "Branding e Identidad de Marca", icon: Palette },
-      { id: 2, name: "Diseño de Logotipo y Manual de Marca", icon: Pen },
-      { id: 3, name: "Gestión de Redes Sociales", icon: Megaphone },
-      { id: 4, name: "Creación de Contenido Visual", icon: Camera },
-      { id: 5, name: "Diseño Gráfico para Marcas", icon: Palette },
-      { id: 6, name: "Publicidad en Redes Sociales", icon: ShoppingBag },
-      { id: 7, name: "Copywriting y Storytelling", icon: PenTool },
-      { id: 8, name: "Estrategias de Marketing Digital", icon: TrendingUp },
-      { id: 9, name: "Marketing de Contenidos", icon: BarChart },
-      { id: 10, name: "Consultoría Creativa y Estrategia de Marca", icon: Lightbulb },
-      { id: 11, name: "Automatización de Marketing", icon: Rocket },
-      { id: 12, name: "Análisis de métricas y optimización", icon: BarChart },
+      { id: 1, name: "Branding e Identidad de Marca", icon: Palette, image: imgService01 },
+      { id: 2, name: "Diseño de Logotipo y Manual de Marca", icon: Pen, image: imgService02 },
+      { id: 3, name: "Gestión de Redes Sociales", icon: Megaphone, image: imgService03 },
+      { id: 4, name: "Creación de Contenido Visual", icon: Camera, image: imgService04 },
+      { id: 5, name: "Diseño Gráfico para Marcas", icon: Palette, image: imgService05 },
+      { id: 6, name: "Publicidad en Redes Sociales", icon: ShoppingBag, image: imgService06 },
+      { id: 7, name: "Copywriting y Storytelling", icon: PenTool, image: imgService07 },
+      { id: 8, name: "Estrategias de Marketing Digital", icon: TrendingUp, image: imgService08 },
+      { id: 9, name: "Marketing de Contenidos", icon: BarChart, image: imgService09 },
+      { id: 10, name: "Consultoría Creativa y Estrategia de Marca", icon: Lightbulb, image: imgService10 },
+      { id: 11, name: "Automatización de Marketing", icon: Rocket, image: imgService11 },
+      { id: 12, name: "Análisis de métricas y optimización", icon: BarChart, image: imgService12 },
     ],
     closing: "Porque en marketing no solo se trata de crear... se trata de crecer.",
+
   },
 
   // ----- NUESTROS PROYECTOS -----
@@ -436,6 +451,7 @@ export const servicesSection = {
   intro: siteData.services.intro,
   services: siteData.services.items,
   closing: siteData.services.closing,
+  image: siteData.services.image,
 };
 
 export const projectsSection = {

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import { servicesSection } from "@/data/nat";
 
 export default function Services() {
@@ -16,44 +17,50 @@ export default function Services() {
   return (
     <section
       id="servicios"
-      className="relative overflow-hidden py-28 text-foreground lg:py-36"
-      style={{
-        background: "oklch(0.97 0.005 230)",
-      }}
+      className="relative overflow-hidden bg-foreground py-28 text-background lg:py-36"
     >
-      {/* Floating orb */}
+      {/* Ambient glow orbs */}
       <motion.div
-        className="pointer-events-none absolute top-0 right-0 h-[600px] w-[600px] rounded-full blur-3xl"
-        style={{ background: "oklch(0.85 0.04 220 / 0.15)" }}
-        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full blur-3xl"
-        style={{ background: "oklch(0.85 0.04 220 / 0.10)" }}
-        animate={{ x: [0, -20, 0], y: [0, 20, 0] }}
+        className="pointer-events-none absolute -top-40 -left-40 h-[700px] w-[700px] rounded-full blur-[120px]"
+        style={{ background: "oklch(0.55 0.12 220 / 0.12)" }}
+        animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
         transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
       />
+      <motion.div
+        className="pointer-events-none absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full blur-[100px]"
+        style={{ background: "oklch(0.6 0.1 280 / 0.08)" }}
+        animate={{ scale: [1, 1.15, 1] }}
+        transition={{ repeat: Infinity, duration: 25, ease: "easeInOut" }}
+      />
 
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        {/* Label */}
+      {/* Subtle grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
+        {/* Section header */}
         <motion.span
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-4 block text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
+          className="mb-4 block text-xs font-medium tracking-[0.3em] text-background/40 uppercase"
         >
           {sectionLabel}
         </motion.span>
 
-        {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="mb-4 max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
+          className="mb-4 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-background sm:text-4xl lg:text-5xl"
         >
           {intro}
         </motion.h2>
@@ -63,7 +70,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="mb-16 text-sm text-neutral-400"
+          className="mb-16 text-sm text-background/40"
         >
           Elegimos cada herramienta con intención, cada decisión con propósito.
         </motion.p>
@@ -71,54 +78,68 @@ export default function Services() {
         {/* Services grid */}
         <div
           ref={gridRef}
-          className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
           {services.map((service, i) => {
             const Icon = service.icon;
+
             return (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={gridInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={gridInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{
-                  delay: i * 0.05,
-                  duration: 0.5,
+                  delay: i * 0.06,
+                  duration: 0.6,
                   ease: [0.25, 0.46, 0.45, 0.94],
                 }}
-                whileHover={{ y: -3 }}
-                className="group relative overflow-hidden rounded-2xl bg-white/80 px-6 py-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-white hover:shadow-md"
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/[0.15] hover:bg-white/[0.08]"
               >
-                {/* Hover accent line */}
-                <div className="absolute left-0 top-0 h-full w-[3px] scale-y-0 rounded-r-full bg-foreground transition-transform duration-300 group-hover:scale-y-100" />
+                {/* Hover gradient glow */}
+                <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/[0.08] via-transparent to-white/[0.04] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                <div className="mb-4 flex items-center gap-3">
-                  {/* Number */}
-                  <span className="font-mono text-xs text-neutral-300 transition-colors group-hover:text-neutral-400">
-                    {String(service.id).padStart(2, "0")}
-                  </span>
-                  {/* Icon */}
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground/5 transition-colors duration-300 group-hover:bg-foreground/10">
-                    <Icon className="h-4 w-4 text-foreground/60 transition-colors duration-300 group-hover:text-foreground" />
+                {/* Service illustration */}
+                <div className="relative mb-5 flex items-start justify-between">
+                  <div className="relative h-16 w-20 shrink-0">
+                    {service.image ? (
+                      <Image
+                        src={service.image}
+                        alt={service.name}
+                        fill
+                        className="object-contain opacity-70 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
+                        sizes="64px"
+                      />
+                    ) : (
+                      <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-white/5">
+                        <Icon className="h-7 w-7 text-white/60" />
+                      </div>
+                    )}
                   </div>
+
                 </div>
 
-                <h3 className="text-sm font-semibold leading-snug tracking-wide text-neutral-700 transition-colors group-hover:text-foreground">
+                {/* Service name */}
+                <h3 className="relative text-base font-semibold leading-snug tracking-tight text-background/80 transition-colors duration-300 group-hover:text-background">
                   {service.name}
                 </h3>
+
+                {/* Bottom accent bar */}
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-white/40 via-white/20 to-transparent transition-all duration-700 group-hover:w-full" />
               </motion.div>
             );
           })}
         </div>
 
         {/* Closing */}
-        <div ref={closingRef} className="mt-20 border-t border-foreground/8 pt-12">
+        <div ref={closingRef} className="mt-20 border-t border-white/[0.08] pt-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={closingInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="mx-auto max-w-2xl text-center"
           >
-            <p className="text-lg font-semibold tracking-tight text-foreground sm:text-xl lg:text-2xl">
+            <p className="text-lg font-semibold tracking-tight text-background sm:text-xl lg:text-2xl">
               {closing}
             </p>
             <motion.button
@@ -127,7 +148,7 @@ export default function Services() {
                   .querySelector("#contacto")
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:scale-105"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-background px-8 py-3.5 text-sm font-semibold text-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] hover:scale-105"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
