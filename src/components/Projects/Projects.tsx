@@ -100,7 +100,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="col-span-12 mt-6 flex justify-center lg:col-span-4 lg:mt-0 lg:justify-end"
+            className="mt-6 flex w-full justify-center lg:col-span-4 lg:mt-0 lg:justify-end"
           >
             <div className="relative h-32 w-32 overflow-hidden rounded-3xl shadow-lg lg:h-52 lg:w-52">
               <Image

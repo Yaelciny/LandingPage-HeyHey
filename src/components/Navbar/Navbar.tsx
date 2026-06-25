@@ -45,10 +45,13 @@ export default function Navbar() {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          open
+            ? "bg-background"
+            : scrolled
+            ? "bg-background/90 backdrop-blur-md"
+            : "bg-transparent"
+        }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           {/* Logo */}
@@ -93,12 +96,16 @@ export default function Navbar() {
           {/* Buttons */}
           <div className="flex items-center gap-4">
             {/* CTA */}
-            <button
-              onClick={() => handleNav("#contacto")}
+            <a
+              href="#contacto"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav("#contacto");
+              }}
               className="hidden md:inline-flex items-center rounded-full border border-foreground px-5 py-2 text-sm font-medium text-foreground transition-all hover:bg-foreground hover:text-background"
             >
               Contáctanos
-            </button>
+            </a>
 
             {/* Boton hamburguesa con animacion de transformacion a X */}
             <button
@@ -133,20 +140,17 @@ export default function Navbar() {
             >
               <nav className="px-6 py-4 flex flex-col gap-2">
                 {siteData.navLinks.map((link, i) => (
-                  <motion.a
+                  <a
                     key={link.href}
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
                       handleNav(link.href);
                     }}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.07, duration: 0.3 }}
-                    className="py-3 px-4 text-lg font-semibold tracking-wide text-foreground hover:bg-neutral-50 rounded-lg transition-colors"
+                    className="py-3 px-4 text-lg font-semibold tracking-wide text-foreground hover:bg-neutral-50 rounded-lg transition-colors text-left"
                   >
                     {link.label}
-                  </motion.a>
+                  </a>
                 ))}
               </nav>
             </motion.div>

@@ -39,35 +39,18 @@ export default function Hero() {
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-foreground text-background"
     >
       {/* ========== MOBILE: Video y contenido (visible solo en pantallas < md) ========== */}
-      <div className="absolute inset-0 z-10 flex flex-col overflow-hidden md:hidden">
+      <div className="absolute inset-0 z-20 flex flex-col overflow-hidden md:hidden">
         {/* Video de fondo */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 h-full w-full object-cover -z-10"
+          className="absolute inset-0 h-full w-full object-cover -z-10 brightness-70"
         >
           <source src="/videos/hh-celular.mp4" type="video/mp4" />
           Tu navegador no soporta el formato de video.
         </video>
-        
-        {/* Contenido superpuesto */}
-        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center bg-black/40 px-6">
-          <h1 className="text-center text-4xl font-bold leading-tight text-white sm:text-5xl">
-            Creamos experiencias que cautivan
-          </h1>
-          <button 
-            onClick={() => {
-              document
-                .querySelector("#proyectos")
-                ?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="mt-8 rounded-full bg-white px-8 py-3.5 font-semibold text-black transition hover:bg-gray-200"
-          >
-            Ver Proyectos
-          </button>
-        </div>
       </div>
 
       {/* ========== DESKTOP: Fondo animado con gradientes, particulas y cuadricula (oculto en movil) ========== */}
@@ -184,26 +167,30 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.6, ease: "easeOut" }}
             >
-              <button
-                onClick={() => {
+              <a
+                href="#contacto"
+                onClick={(e) => {
+                  e.preventDefault();
                   document
                     .querySelector("#contacto")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="group relative w-full overflow-hidden rounded-full bg-background px-7 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)] sm:w-auto"
+                className="group relative w-full overflow-hidden rounded-full bg-background px-7 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)] sm:w-auto text-center"
               >
                 <span className="relative z-10">Habla con nosotros</span>
-              </button>
-              <button
-                onClick={() => {
+              </a>
+              <a
+                href="#servicios"
+                onClick={(e) => {
+                  e.preventDefault();
                   document
                     .querySelector("#servicios")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="w-full rounded-full border border-background/30 px-7 py-3 text-sm font-medium text-background/80 transition-all duration-300 hover:border-background/60 hover:text-background sm:w-auto"
+                className="w-full rounded-full border border-background/30 px-7 py-3 text-sm font-medium text-background/80 transition-all duration-300 hover:border-background/60 hover:text-background sm:w-auto text-center"
               >
                 Ver servicios
-              </button>
+              </a>
             </motion.div>
           </motion.div>
         </AnimatePresence>
@@ -229,26 +216,27 @@ export default function Hero() {
             </button>
           ))}
         </div>
+        {/* Marquee infinito — desplazamiento continuo con los diferenciadores */}
+        <div className=" mt-10 relative z-10 w-full overflow-hidden border-t border-background/10">
+          <motion.div
+            className="flex whitespace-nowrap py-5"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          >
+            {[...distinctives, ...distinctives].map((d, i) => (
+              <span
+                key={i}
+                className="mx-8 flex shrink-0 items-center gap-3 text-xs tracking-[0.2em] text-background/40 uppercase sm:text-sm"
+              >
+                <span className="inline-block h-1 w-1 rotate-45 bg-background/30" />
+                {d.label}
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      {/* Marquee infinito — desplazamiento continuo con los diferenciadores */}
-      <div className="relative z-10 w-full overflow-hidden border-t border-background/10">
-        <motion.div
-          className="flex whitespace-nowrap py-5"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-        >
-          {[...distinctives, ...distinctives].map((d, i) => (
-            <span
-              key={i}
-              className="mx-8 flex shrink-0 items-center gap-3 text-xs tracking-[0.2em] text-background/40 uppercase sm:text-sm"
-            >
-              <span className="inline-block h-1 w-1 rotate-45 bg-background/30" />
-              {d.label}
-            </span>
-          ))}
-        </motion.div>
-      </div>
+
     </section>
   );
 }

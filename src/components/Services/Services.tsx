@@ -93,7 +93,7 @@ export default function Services() {
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="col-span-12 mt-6 flex justify-center lg:col-span-4 lg:mt-0 lg:justify-end"
+            className="mt-6 flex w-full justify-center lg:col-span-4 lg:mt-0 lg:justify-end"
           >
             <motion.div
               className="relative h-32 w-48 overflow-hidden rounded-2xl opacity-80 transition-opacity duration-500 hover:opacity-100 lg:h-48 lg:w-64 lg:opacity-90"
@@ -176,7 +176,7 @@ export default function Services() {
               initial={{ opacity: 0, x: -40 }}
               animate={closingInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="order-last col-span-12 mt-6 flex justify-center lg:order-first lg:col-span-3 lg:mt-0"
+              className="order-last mt-6 flex w-full justify-center lg:order-first lg:col-span-3 lg:mt-0"
             >
               <div className="relative h-40 w-32 overflow-hidden rounded-3xl opacity-100 shadow-xl lg:h-56 lg:w-44">
                 <Image
@@ -200,8 +200,10 @@ export default function Services() {
               <p className="text-lg font-semibold tracking-tight text-background sm:text-xl lg:text-2xl">
                 {closing}
               </p>
-              <motion.button
-                onClick={() => {
+              <motion.a
+                href="#contacto"
+                onClick={(e) => {
+                  e.preventDefault();
                   document
                     .querySelector("#contacto")
                     ?.scrollIntoView({ behavior: "smooth" });
@@ -225,7 +227,7 @@ export default function Services() {
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </motion.button>
+              </motion.a>
             </motion.div>
           </div>
         </div>
