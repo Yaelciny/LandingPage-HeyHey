@@ -1,21 +1,21 @@
 // ============================================================
 // Hero — Seccion principal con carrusel de banners animados.
-// Incluye fondo con particulas, titulo palabra por palabra,
-// botones CTA y marquee infinito de diferenciadores.
+// En movil muestra un video de fondo a pantalla completa.
+// En desktop muestra el carrusel con particulas y animaciones.
+// Incluye botones CTA y marquee infinito de diferenciadores.
 // ============================================================
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { heroSection } from "@/data/nat";
-import { ChevronDown } from "lucide-react";
 
 // Intervalo del carrusel en milisegundos (6 segundos por banner)
 const INTERVAL = 6000;
 
 export default function Hero() {
   // Desestructurar los datos del hero desde el archivo centralizado
-  const { banners, distinctives, scrollIndicatorText } = heroSection;
+  const { banners, distinctives } = heroSection;
   const [current, setCurrent] = useState(0);
 
   // Avanzar al siguiente banner de forma ciclica
@@ -38,8 +38,40 @@ export default function Hero() {
       id="inicio"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-foreground text-background"
     >
-      {/* Fondo animado con gradientes, particulas flotantes y cuadricula */}
-      <div className="pointer-events-none absolute inset-0">
+      {/* ========== MOBILE: Video y contenido (visible solo en pantallas < md) ========== */}
+      <div className="absolute inset-0 z-10 flex flex-col overflow-hidden md:hidden">
+        {/* Video de fondo */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover -z-10"
+        >
+          <source src="/videos/hh-celular.mp4" type="video/mp4" />
+          Tu navegador no soporta el formato de video.
+        </video>
+        
+        {/* Contenido superpuesto */}
+        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center bg-black/40 px-6">
+          <h1 className="text-center text-4xl font-bold leading-tight text-white sm:text-5xl">
+            Creamos experiencias que cautivan
+          </h1>
+          <button 
+            onClick={() => {
+              document
+                .querySelector("#proyectos")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="mt-8 rounded-full bg-white px-8 py-3.5 font-semibold text-black transition hover:bg-gray-200"
+          >
+            Ver Proyectos
+          </button>
+        </div>
+      </div>
+
+      {/* ========== DESKTOP: Fondo animado con gradientes, particulas y cuadricula (oculto en movil) ========== */}
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
         <motion.div
           className="absolute -top-40 -right-40 h-[700px] w-[700px] rounded-full"
           style={{
@@ -90,8 +122,8 @@ export default function Hero() {
         />
       </div>
 
-      {/* Contenido principal del carrusel con animacion de entrada/salida */}
-      <div className="relative z-10 flex min-h-[65vh] w-full max-w-5xl flex-col items-center justify-center px-6 text-center">
+      {/* Contenido principal del carrusel con animacion de entrada/salida (solo en desktop) */}
+      <div className="relative z-10 hidden min-h-[65vh] w-full max-w-5xl flex-col items-center justify-center px-6 text-center md:flex">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -103,7 +135,7 @@ export default function Hero() {
           >
 
             {/* Titulo con efecto de revelacion palabra por palabra */}
-            <h1 className="flex flex-wrap justify-center gap-x-4 text-5xl font-bold leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-7xl">
+            <h1 className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               {titleWords.map((word, i) => (
                 <motion.span
                   key={`${current}-${i}`}
@@ -126,10 +158,10 @@ export default function Hero() {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
-              className="flex items-center gap-4"
+              className="flex items-center justify-center gap-4"
             >
               <span className="hidden h-px w-8 bg-background/30 sm:block" />
-              <p className="text-base font-medium tracking-wide text-background/70 sm:text-lg md:text-xl">
+              <p className="text-center text-sm font-medium tracking-wide text-background/70 sm:text-lg md:text-xl">
                 {banners[current].subtitle}
               </p>
               <span className="hidden h-px w-8 bg-background/30 sm:block" />
@@ -137,7 +169,7 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p
-              className="max-w-2xl text-sm leading-relaxed text-background/50 sm:text-base"
+              className="max-w-2xl text-center text-sm leading-relaxed text-background/50 sm:text-base"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.6, ease: "easeOut" }}
@@ -147,7 +179,7 @@ export default function Hero() {
 
             {/* Botones de accion — navegan hacia Contacto y Servicios */}
             <motion.div
-              className="mt-4 flex flex-wrap items-center justify-center gap-4"
+              className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.6, ease: "easeOut" }}
@@ -158,7 +190,7 @@ export default function Hero() {
                     .querySelector("#contacto")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="group relative overflow-hidden rounded-full bg-background px-7 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)]"
+                className="group relative w-full overflow-hidden rounded-full bg-background px-7 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)] sm:w-auto"
               >
                 <span className="relative z-10">Habla con nosotros</span>
               </button>
@@ -168,7 +200,7 @@ export default function Hero() {
                     .querySelector("#servicios")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="rounded-full border border-background/30 px-7 py-3 text-sm font-medium text-background/80 transition-all duration-300 hover:border-background/60 hover:text-background"
+                className="w-full rounded-full border border-background/30 px-7 py-3 text-sm font-medium text-background/80 transition-all duration-300 hover:border-background/60 hover:text-background sm:w-auto"
               >
                 Ver servicios
               </button>
@@ -176,8 +208,8 @@ export default function Hero() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Indicadores del carrusel con barra de progreso animada */}
-        <div className="mt-12 flex items-center gap-3">
+        {/* Indicadores del carrusel con barra de progreso animada (solo desktop) */}
+        <div className="mt-12 hidden items-center gap-3 md:flex">
           {banners.map((_, i) => (
             <button
               key={i}

@@ -51,14 +51,14 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-16"
+          className="mb-16 text-center lg:text-left"
         >
           <span className="text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase">
             {sectionLabel}
           </span>
         </motion.div>
 
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16 text-center lg:text-left">
           {/* Imagen visual — persona azul entre la multitud (AGRANDADA) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -83,7 +83,7 @@ export default function About() {
           {/* Concepto + descripcion */}
           <div className="space-y-10 lg:col-span-7">
             {/* Concepto principal con animacion palabra por palabra */}
-            <h2 className="flex flex-wrap gap-x-3 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2 className="flex flex-wrap justify-center gap-x-3 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:justify-start lg:text-5xl">
               {conceptWords.map((word, i) => (
                 <motion.span
                   key={i}
@@ -117,7 +117,7 @@ export default function About() {
 
         {/* Values */}
         <div className="mt-20 border-t border-neutral-100 pt-16">
-          <div className="mb-10">
+          <div className="mb-10 text-center lg:text-left">
             <motion.h3
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -157,7 +157,7 @@ export default function About() {
 
         {/* Nueva ubicacion del hombre foco + Frase de cierre */}
         <div ref={closingRef} className="mt-24 border-t border-neutral-100 pt-16">
-          <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-between">
+          <div className="flex flex-col items-center gap-10 text-center lg:flex-row lg:justify-between lg:text-left">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}

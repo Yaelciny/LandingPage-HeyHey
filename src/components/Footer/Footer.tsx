@@ -29,7 +29,7 @@ export default function Footer() {
       />
 
       <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+        <div className="grid gap-10 text-center md:grid-cols-3 md:gap-8 md:text-left">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ export default function Footer() {
             </p>
 
             {/* Iconos de redes sociales con animacion de hover */}
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-6 flex items-center justify-center gap-3 md:justify-start">
               {[
                 {
                   href: "https://instagram.com/hey_hey_marketing",

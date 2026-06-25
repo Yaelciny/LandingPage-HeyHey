@@ -31,13 +31,13 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-10 block text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
+          className="mb-10 block text-center text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase lg:text-left"
         >
           {sectionLabel}
         </motion.span>
 
         {/* Heading gigante — cada linea desliza desde abajo */}
-        <div className="mb-20 flex flex-col gap-1 overflow-hidden border-b border-neutral-100 pb-20">
+        <div className="mb-20 flex flex-col items-center gap-1 overflow-hidden border-b border-neutral-100 pb-20 lg:items-start">
           {["Hablemos", "de tu", "proyecto."].map((line, i) => (
             <div key={i} className="overflow-hidden">
               <motion.h2
@@ -48,7 +48,7 @@ export default function Contact() {
                   duration: 0.8,
                   ease: [0.25, 0.46, 0.45, 0.94],
                 }}
-                className="text-[clamp(3.5rem,11vw,8rem)] font-black leading-[0.95] tracking-tighter text-foreground"
+                className="text-center text-[clamp(3.5rem,11vw,8rem)] font-black leading-[0.95] tracking-tighter text-foreground lg:text-left"
               >
                 {line}
               </motion.h2>
@@ -60,7 +60,7 @@ export default function Contact() {
         <div className="grid gap-16 lg:grid-cols-[1fr_auto]">
 
           {/* Izquierda — enlaces grandes tipograficos hacia WhatsApp, correo e Instagram */}
-          <div className="space-y-10">
+          <div className="space-y-10 text-center lg:text-left">
             {/* Phone — extra large */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -74,7 +74,7 @@ export default function Contact() {
                 href={`https://wa.me/${info.phone.replace(/\+/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-end gap-3 text-3xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-4xl lg:text-5xl"
+                className="group inline-flex items-end justify-center gap-3 text-3xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-4xl lg:justify-start lg:text-5xl"
               >
                 {info.phone}
                 <ArrowUpRight className="mb-1 h-7 w-7 shrink-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -92,7 +92,7 @@ export default function Contact() {
               </span>
               <a
                 href={`mailto:${info.email}`}
-                className="group inline-flex items-end gap-3 text-2xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-3xl lg:text-4xl"
+                className="group inline-flex items-end justify-center gap-3 text-2xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-3xl lg:justify-start lg:text-4xl"
               >
                 {info.email}
                 <ArrowUpRight className="mb-1 h-6 w-6 shrink-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -112,7 +112,7 @@ export default function Contact() {
                 href={info.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-end gap-3 text-xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-2xl lg:text-3xl"
+                className="group inline-flex items-end justify-center gap-3 text-xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-neutral-500 sm:text-2xl lg:justify-start lg:text-3xl"
               >
                 {info.instagramHandle}
                 <ArrowUpRight className="mb-0.5 h-5 w-5 shrink-0 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -125,7 +125,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
-            className="flex flex-col justify-between gap-12 lg:max-w-[280px]"
+            className="flex flex-col items-center justify-between gap-12 lg:max-w-[280px] lg:items-start"
           >
             {/* Closing phrase + CTA */}
             <div>

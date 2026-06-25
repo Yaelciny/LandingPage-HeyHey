@@ -54,7 +54,7 @@ export default function Services() {
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
         <div className="mb-16 grid items-end gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-8">
+          <div className="text-center lg:col-span-8 lg:text-left">
             {/* Section header */}
             <motion.span
               initial={{ opacity: 0, x: -40 }}
@@ -115,7 +115,7 @@ export default function Services() {
         {/* Grilla de tarjetas de servicios */}
         <div
           ref={gridRef}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-center sm:text-left"
         >
           {services.map((service, i) => {
             const Icon = service.icon;
@@ -137,7 +137,7 @@ export default function Services() {
                 <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/[0.08] via-transparent to-white/[0.04] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 {/* Imagen ilustrativa del servicio o icono de respaldo */}
-                <div className="relative mb-5 flex items-start justify-between">
+                <div className="relative mb-5 flex items-start justify-center sm:justify-between">
                   <div className="relative h-16 w-20 shrink-0">
                     {service.image ? (
                       <Image

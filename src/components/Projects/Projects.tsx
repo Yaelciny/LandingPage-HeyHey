@@ -54,14 +54,14 @@ export default function Projects() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-4 block text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
+          className="mb-4 block text-center text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase lg:text-left"
         >
           {sectionLabel}
         </motion.span>
 
         {/* Intro title + Imagen del puzzle (AGRANDADA) */}
         <div className="mb-20 grid items-end gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-8">
+          <div className="text-center lg:col-span-8 lg:text-left">
             <div className="mb-6">
               <h2 className="max-w-3xl text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                 {["Proyectos que", "hablan", "por sí solos"].map((line, i) => (
@@ -88,7 +88,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-              className="max-w-xl text-sm leading-relaxed text-neutral-400 sm:text-base"
+              className="mx-auto max-w-xl text-center text-sm leading-relaxed text-neutral-400 sm:text-base lg:mx-0 lg:text-left"
             >
               {intro}
             </motion.p>
@@ -123,12 +123,12 @@ export default function Projects() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mb-12 text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
+            className="mb-12 text-center text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase lg:text-left"
           >
             {processTitle}
           </motion.h3>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center sm:text-left">
             {process.map((step, i) => (
               <motion.div
                 key={step.id}
@@ -144,7 +144,7 @@ export default function Projects() {
                 className="group relative rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
                 {/* Numero del paso con animacion de rotacion al hover */}
-                <div className="mb-5 flex items-center justify-between">
+                <div className="mb-5 flex items-center justify-center gap-2 sm:justify-between">
                   <motion.span
                     className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-foreground text-base font-bold text-foreground transition-all duration-300 group-hover:bg-foreground group-hover:text-background"
                     whileHover={{ scale: 1.1, rotate: 360 }}
@@ -239,7 +239,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mb-10 text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase"
+            className="mb-10 text-center text-xs font-medium tracking-[0.3em] text-neutral-400 uppercase lg:text-left"
           >
             {casesTitle}
           </motion.h3>
