@@ -56,7 +56,7 @@ export default function Hero() {
       {/* ========== DESKTOP: Fondo animado con gradientes, particulas y cuadricula (oculto en movil) ========== */}
       <div className="pointer-events-none absolute inset-0 hidden md:block">
         <motion.div
-          className="absolute -top-40 -right-40 h-[700px] w-[700px] rounded-full"
+          className="absolute top-40 -right-40 h-[700px] w-[700px] rounded-full"
           style={{
             background:
               "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)",
@@ -106,7 +106,7 @@ export default function Hero() {
       </div>
 
       {/* Contenido principal del carrusel con animacion de entrada/salida (solo en desktop) */}
-      <div className="relative z-10 hidden min-h-[65vh] w-full max-w-5xl flex-col items-center justify-center px-6 text-center md:flex">
+      <div className="mt-20 relative z-10 hidden min-h-[65vh] w-full max-w-5xl flex-col items-center justify-center px-6 text-center md:flex">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}

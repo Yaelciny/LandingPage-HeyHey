@@ -338,9 +338,9 @@ export const siteData: SiteData = {
     intro: "Soluciones creativas diseñadas para que tu marca destaque.",
     items: [
       { id: 1, name: "Branding e Identidad de Marca", icon: Palette, image: imgService01 },
-      { id: 2, name: "Diseño de Logotipo y Manual de Marca", icon: Pen, image: imgService02 },
-      { id: 3, name: "Gestión de Redes Sociales", icon: Megaphone, image: imgService03 },
-      { id: 4, name: "Creación de Contenido Visual", icon: Camera, image: imgService04 },
+      { id: 2, name: " Diseño de Logotipo y Manual de Marca", icon: Pen, image: imgService02 },
+      { id: 3, name: "Gestión y campañas en redes sociales.", icon: Megaphone, image: imgService03 },
+      { id: 4, name: "Creación de contenido audiovisual.", icon: Camera, image: imgService04 },
       { id: 5, name: "Diseño Gráfico para Marcas", icon: Palette, image: imgService05 },
       { id: 6, name: "Publicidad en Redes Sociales", icon: ShoppingBag, image: imgService06 },
       { id: 7, name: "Copywriting y Storytelling", icon: PenTool, image: imgService07 },
