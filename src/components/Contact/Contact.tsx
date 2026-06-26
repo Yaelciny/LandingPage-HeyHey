@@ -60,7 +60,7 @@ export default function Contact() {
         <div className="grid gap-16 lg:grid-cols-[1fr_auto]">
 
           {/* Izquierda — enlaces grandes tipograficos hacia WhatsApp, correo e Instagram */}
-          <div className="space-y-10 text-center lg:text-left">
+          <div className="space-y-10 text-left">
             {/* Phone — extra large */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
