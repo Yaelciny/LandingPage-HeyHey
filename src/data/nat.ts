@@ -38,10 +38,19 @@ import imgService06 from '@/assets/servicios/service06.png';
 import imgService07 from '@/assets/servicios/service07.png';
 import imgService08 from '@/assets/servicios/service08.png';
 import imgService11 from '@/assets/servicios/service11.png';
-// ============================================================
-// INTERFACES — Definen la estructura de cada seccion del sitio.
-// Cualquier dato nuevo debe seguir estas interfaces.
-// ============================================================
+import logoBlanco from '@/assets/logo/logo-blanco.png';
+import logoNegro from '@/assets/logo/logo-negro.png';
+import logo2 from '@/assets/logo/logo-10.png';
+import logo3 from '@/assets/logo/logo-11.png';
+import logo4 from '@/assets/logo/logo-12.png';
+import logo5 from '@/assets/logo/logo-13.png';
+import logo6 from '@/assets/logo/logo-14.png';
+import logo7 from '@/assets/logo/logo-15.png';
+import logo8 from '@/assets/logo/logo-16.png';
+import logo9 from '@/assets/logo/logo-17.png';
+import logo10 from '@/assets/logo/logo-18.png';
+
+
 export interface Brand {
   name: string;
   suffix: string;
@@ -163,6 +172,8 @@ export interface SiteMetadata {
 }
 
 export interface SiteData {
+  logoNegro: StaticImageData;
+  logoBlanco: StaticImageData;
   brand: Brand;
   siteName: string;
   siteDescription: string;
@@ -228,6 +239,8 @@ export const siteMetadata = {
 // Objeto principal — Agrupa TODOS los datos del sitio.
 // Cada propiedad alimenta una seccion distinta de la landing page.
 export const siteData: SiteData = {
+  logoNegro: logoNegro,
+  logoBlanco: logoBlanco,
   brand,
   siteName: brand.full,
   siteDescription:

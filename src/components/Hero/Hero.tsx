@@ -36,7 +36,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-foreground text-background"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-foreground text-primary"
     >
       {/* ========== MOBILE: Video y contenido (visible solo en pantallas < md) ========== */}
       <div className="absolute inset-0 z-20 flex flex-col overflow-hidden md:hidden">
@@ -59,7 +59,7 @@ export default function Hero() {
           className="absolute top-40 -right-40 h-[700px] w-[700px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(215,229,222,0.05) 0%, transparent 70%)",
           }}
           animate={{ scale: [1, 1.15, 1], rotate: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
@@ -68,7 +68,7 @@ export default function Hero() {
           className="absolute -bottom-60 -left-60 h-[800px] w-[800px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(215,229,222,0.03) 0%, transparent 70%)",
           }}
           animate={{ scale: [1, 1.1, 1], rotate: [0, -8, 0] }}
           transition={{ repeat: Infinity, duration: 25, ease: "easeInOut" }}
@@ -77,7 +77,7 @@ export default function Hero() {
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-background/20"
+            className="absolute rounded-full bg-primary/20"
             style={{
               top: `${15 + i * 10}%`,
               left: `${5 + i * 12}%`,
@@ -99,7 +99,7 @@ export default function Hero() {
           className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+              "linear-gradient(rgba(215,229,222,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(215,229,222,0.5) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -143,16 +143,16 @@ export default function Hero() {
               transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
               className="flex items-center justify-center gap-4"
             >
-              <span className="hidden h-px w-8 bg-background/30 sm:block" />
-              <p className="text-center text-sm font-medium tracking-wide text-background/70 sm:text-lg md:text-xl">
+              <span className="hidden h-px w-8 bg-primary/30 sm:block" />
+              <p className="text-center text-sm font-medium tracking-wide text-primary/70 sm:text-lg md:text-xl">
                 {banners[current].subtitle}
               </p>
-              <span className="hidden h-px w-8 bg-background/30 sm:block" />
+              <span className="hidden h-px w-8 bg-primary/30 sm:block" />
             </motion.div>
 
             {/* Description */}
             <motion.p
-              className="max-w-2xl text-center text-sm leading-relaxed text-background/50 sm:text-base"
+              className="max-w-2xl text-center text-sm leading-relaxed text-primary/70 sm:text-base"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.6, ease: "easeOut" }}
@@ -175,7 +175,7 @@ export default function Hero() {
                     .querySelector("#contacto")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="group relative w-full overflow-hidden rounded-full bg-background px-7 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)] sm:w-auto text-center"
+                className="group relative w-full overflow-hidden rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:shadow-[0_8px_30px_rgba(215,229,222,0.2)] sm:w-auto text-center"
               >
                 <span className="relative z-10">Habla con nosotros</span>
               </a>
@@ -187,7 +187,7 @@ export default function Hero() {
                     .querySelector("#servicios")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="w-full rounded-full border border-background/30 px-7 py-3 text-sm font-medium text-background/80 transition-all duration-300 hover:border-background/60 hover:text-background sm:w-auto text-center"
+                className="w-full rounded-full border border-primary/30 px-7 py-3 text-sm font-medium text-primary/80 transition-all duration-300 hover:border-primary/60 hover:text-primary sm:w-auto text-center"
               >
                 Ver servicios
               </a>
@@ -202,12 +202,12 @@ export default function Hero() {
               key={i}
               onClick={() => setCurrent(i)}
               aria-label={`Ir a banner ${i + 1}`}
-              className="relative h-[3px] overflow-hidden rounded-full bg-background/20 transition-all duration-300"
+              className="relative h-[3px] overflow-hidden rounded-full bg-primary/20 transition-all duration-300"
               style={{ width: i === current ? 40 : 16 }}
             >
               {i === current && (
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-background"
+                  className="absolute inset-0 rounded-full bg-primary"
                   initial={{ scaleX: 0, transformOrigin: "left" }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: INTERVAL / 1000, ease: "linear" }}
@@ -217,7 +217,7 @@ export default function Hero() {
           ))}
         </div>
         {/* Marquee infinito — desplazamiento continuo con los diferenciadores */}
-        <div className=" mt-10 relative z-10 w-full overflow-hidden border-t border-background/10">
+        <div className=" mt-10 relative z-10 w-full overflow-hidden border-t border-primary/10">
           <motion.div
             className="flex whitespace-nowrap py-5"
             animate={{ x: ["0%", "-50%"] }}
@@ -226,9 +226,9 @@ export default function Hero() {
             {[...distinctives, ...distinctives].map((d, i) => (
               <span
                 key={i}
-                className="mx-8 flex shrink-0 items-center gap-3 text-xs tracking-[0.2em] text-background/40 uppercase sm:text-sm"
+                className="mx-8 flex shrink-0 items-center gap-3 text-xs tracking-[0.2em] text-primary/40 uppercase sm:text-sm"
               >
-                <span className="inline-block h-1 w-1 rotate-45 bg-background/30" />
+                <span className="inline-block h-1 w-1 rotate-45 bg-primary/30" />
                 {d.label}
               </span>
             ))}

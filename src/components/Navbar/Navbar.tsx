@@ -8,6 +8,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteData } from "@/data/nat";
+import Image from "next/image";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -63,12 +64,12 @@ export default function Navbar() {
             }}
           >
             <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight text-foreground uppercase">
-                {siteData.brand.name}
-              </span>
-              <span className="text-[10px] tracking-widest uppercase text-neutral-400">
-                {siteData.brand.suffix}
-              </span>
+              <Image
+                src={scrolled ? siteData.logoNegro : siteData.logoBlanco}
+                alt={siteData.brand.name}
+                priority
+                className="h-12 w-auto object-contain"
+              />
             </div>
           </motion.a>
 
@@ -90,7 +91,7 @@ export default function Navbar() {
                     ? "text-neutral-800"
                     : scrolled
                       ? "text-neutral-800"
-                      : "text-neutral-300"
+                      : "text-primary"
                   }
                   `}
               >
@@ -121,15 +122,15 @@ export default function Navbar() {
             >
               <motion.span
                 animate={open ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                className="block h-[2px] w-6 bg-foreground"
+                className="block h-[2px] w-6 bg-primary"
               />
               <motion.span
                 animate={open ? { opacity: 0 } : { opacity: 1 }}
-                className="block h-[2px] w-6 bg-foreground"
+                className="block h-[2px] w-6 bg-primary"
               />
               <motion.span
                 animate={open ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                className="block h-[2px] w-6 bg-foreground"
+                className="block h-[2px] w-6 bg-primary"
               />
             </button>
           </div>
