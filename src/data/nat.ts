@@ -37,10 +37,7 @@ import imgService05 from '@/assets/servicios/service05.png';
 import imgService06 from '@/assets/servicios/service06.png';
 import imgService07 from '@/assets/servicios/service07.png';
 import imgService08 from '@/assets/servicios/service08.png';
-import imgService09 from '@/assets/servicios/service09.png';
-import imgService10 from '@/assets/servicios/service10.png';
 import imgService11 from '@/assets/servicios/service11.png';
-import imgService12 from '@/assets/servicios/service12.png';
 // ============================================================
 // INTERFACES — Definen la estructura de cada seccion del sitio.
 // Cualquier dato nuevo debe seguir estas interfaces.
@@ -337,18 +334,15 @@ export const siteData: SiteData = {
     title: "Soluciones creativas para tu marca",
     intro: "Soluciones creativas diseñadas para que tu marca destaque.",
     items: [
-      { id: 1, name: "Branding e Identidad de Marca", icon: Palette, image: imgService01 },
-      { id: 2, name: " Diseño de Logotipo y Manual de Marca", icon: Pen, image: imgService02 },
-      { id: 3, name: "Gestión y campañas en redes sociales.", icon: Megaphone, image: imgService03 },
-      { id: 4, name: "Creación de contenido audiovisual.", icon: Camera, image: imgService04 },
-      { id: 5, name: "Diseño Gráfico para Marcas", icon: Palette, image: imgService05 },
-      { id: 6, name: "Publicidad en Redes Sociales", icon: ShoppingBag, image: imgService06 },
-      { id: 7, name: "Copywriting y Storytelling", icon: PenTool, image: imgService07 },
-      { id: 8, name: "Estrategias de Marketing Digital", icon: TrendingUp, image: imgService08 },
-      { id: 9, name: "Marketing de Contenidos", icon: BarChart, image: imgService09 },
-      { id: 10, name: "Consultoría Creativa y Estrategia de Marca", icon: Lightbulb, image: imgService10 },
-      { id: 11, name: "Automatización de Marketing", icon: Rocket, image: imgService11 },
-      { id: 12, name: "Análisis de métricas y optimización", icon: BarChart, image: imgService12 },
+      { id: 1, name: "Branding e identidad de marca.", icon: Palette, image: imgService01 },
+      { id: 2, name: "Gestión y campañas en redes sociales.", icon: Megaphone, image: imgService03 },
+      { id: 3, name: "Desarrollo web.", icon: Zap, image: imgService02 },
+      { id: 4, name: "Campañas en Google ADS.", icon: Target, image: imgService06 },
+      { id: 5, name: "Creación de contenido audiovisual.", icon: Camera, image: imgService04 },
+      { id: 6, name: "Comunicación y creación de contenidos.", icon: PenTool, image: imgService07 },
+      { id: 7, name: "Diseño gráfico.", icon: Pen, image: imgService05 },
+      { id: 8, name: "Estrategias de Marketing online y offline.", icon: TrendingUp, image: imgService08 },
+      { id: 9, name: "Desarrollo de apps, chatbot, CRM.", icon: Rocket, image: imgService11 },
     ],
     closing: "Porque en marketing no solo se trata de crear... se trata de crecer.",
 
