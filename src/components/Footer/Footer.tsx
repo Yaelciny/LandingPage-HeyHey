@@ -7,7 +7,22 @@
 
 import { motion } from "framer-motion";
 import { brandName, footerData, navLinks } from "@/data/nat";
-import { Mail, Phone, Share2 } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+
+// Iconos sociales — no disponibles en esta version de lucide-react
+const InstagramIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
+const FacebookIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
 
 export default function Footer() {
   // Funcion de scroll suave reutilizada para los links de navegacion
@@ -52,9 +67,14 @@ export default function Footer() {
             <div className="mt-6 flex items-center justify-center gap-3 md:justify-start">
               {[
                 {
-                  href: "https://instagram.com/hey_hey_marketing",
-                  icon: Share2,
+                  href: "https://www.instagram.com/heyhey_mkt?igsh=NG9vOGpybjdsMWw0",
+                  icon: InstagramIcon,
                   label: "Instagram",
+                },
+                {
+                  href: "https://www.facebook.com/share/1G5RAjMtF7/?mibextid=wwXIfr",
+                  icon: FacebookIcon,
+                  label: "Facebook",
                 },
                 { href: "mailto:hola@heyheymarketing.mx", icon: Mail, label: "Email" },
                 { href: "https://wa.me/523312694198", icon: Phone, label: "WhatsApp" },
@@ -81,7 +101,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           >
-            <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-white/30 uppercase">
+            <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-white/70 uppercase">
               Navegación
             </p>
             <ul className="space-y-3">
@@ -120,7 +140,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-white/30 uppercase">
+            <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-white/70 uppercase">
               Contacto
             </p>
             <div className="space-y-3">

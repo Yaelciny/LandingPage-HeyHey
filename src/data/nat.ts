@@ -127,6 +127,7 @@ export interface CaseStudyItem {
   name: string;
   tags: string;
   icon: LucideIcon;
+  video?: string;
 }
 
 export interface ProjectsSection {
@@ -399,9 +400,9 @@ export const siteData: SiteData = {
     },
     casesTitle: "Casos de Éxito",
     cases: [
-      { name: "Café Aurora", tags: "Branding / Identidad visual", icon: Star },
-      { name: "Fit Gym", tags: "Gestión de redes + contenido", icon: Star },
-      { name: "Casa Verde", tags: "Branding + estrategia digital", icon: Star },
+      { name: "Soluciones JABA", tags: "Video recorrido", icon: Star, video: "/proyectos/el-palomar.mp4" },
+      { name: "Residencial Privanzas", tags: "Video institucional", icon: Star, video: "/proyectos/img-5470.mp4" },
+      { name: "Ambar de Luna", tags: "Video promocional", icon: Star, video: "/proyectos/matcha.mp4" },
     ],
     viewProjectText: "Ver proyecto",
   },
@@ -419,7 +420,7 @@ export const siteData: SiteData = {
       },
       {
         label: "Teléfono / WhatsApp",
-        value: "+523312694198",
+        value: "+52 33 1269 4198",
         href: "https://wa.me/523312694198",
       },
       {
@@ -429,8 +430,8 @@ export const siteData: SiteData = {
       },
       {
         label: "Instagram",
-        value: "@hey_hey_marketing",
-        href: "https://instagram.com/hey_hey_marketing",
+        value: "@heyhey_mkt",
+        href: "https://www.instagram.com/heyhey_mkt?igsh=NG9vOGpybjdsMWw0",
       },
     ],
     cta: "Contáctanos",

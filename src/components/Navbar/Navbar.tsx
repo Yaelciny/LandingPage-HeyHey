@@ -122,15 +122,15 @@ export default function Navbar() {
             >
               <motion.span
                 animate={open ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                className="block h-[2px] w-6 bg-primary"
+                className={`block h-[2px] w-6 ${open ? "bg-primary" : scrolled ? "bg-foreground" : "bg-background"}`}
               />
               <motion.span
                 animate={open ? { opacity: 0 } : { opacity: 1 }}
-                className="block h-[2px] w-6 bg-primary"
+                className={`block h-[2px] w-6 ${open ? "bg-primary" : scrolled ? "bg-foreground" : "bg-background"}`}
               />
               <motion.span
                 animate={open ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                className="block h-[2px] w-6 bg-primary"
+                className={`block h-[2px] w-6 ${open ? "bg-primary" : scrolled ? "bg-foreground" : "bg-background"}`}
               />
             </button>
           </div>

@@ -5,13 +5,12 @@
 // ============================================================
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { projectsSection } from "@/data/nat";
 import puzzleImg from "@/assets/otro/manos-armando-rompecabezas.png";
-import chessImg from "@/assets/otro/piezas-ajedrez.jpg";
-import growthImg from "@/assets/otro/regando-arbol-dinero.png";
+// Removed unused image imports (chessImg, growthImg) after user deleted decorative images
 
 // Paletas de gradiente oscuro para las tarjetas de casos de exito
 const CARD_GRADIENTS = [
@@ -19,6 +18,13 @@ const CARD_GRADIENTS = [
   "from-zinc-900 via-zinc-800 to-stone-700",
   "from-neutral-900 via-neutral-800 to-neutral-700",
 ];
+
+// Tipo para el video activo en el lightbox
+interface ActiveVideo {
+  src: string;
+  name: string;
+  tags: string;
+}
 
 export default function Projects() {
   // Desestructurar datos de proyectos desde el archivo centralizado
@@ -32,6 +38,28 @@ export default function Projects() {
     viewProjectText,
   } = projectsSection;
 
+  // Estado para el lightbox de video
+  const [activeVideo, setActiveVideo] = useState<ActiveVideo | null>(null);
+  const modalVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Cerrar modal con Escape
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") setActiveVideo(null);
+  }, []);
+
+  useEffect(() => {
+    if (activeVideo) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [activeVideo, handleKeyDown]);
+
   // Refs para animar el proceso y los casos solo cuando son visibles
   const processRef = useRef(null);
   const processInView = useInView(processRef, { once: true, amount: 0.3 });
@@ -40,6 +68,7 @@ export default function Projects() {
   const casesInView = useInView(casesRef, { once: true, amount: 0.2 });
 
   return (
+    <>
     <section
       id="proyectos"
       className="relative overflow-hidden bg-background py-28 lg:py-36"
@@ -194,45 +223,6 @@ export default function Projects() {
 
         {/* Cases — con imagen de ajedrez y arbol de crecimiento */}
         <div ref={casesRef} className="relative">
-          {/* Imagen de ajedrez como fondo decorativo — estrategia ganadora (AGRANDADA y visible en movil) */}
-          <div className="pointer-events-none absolute -right-10 top-0 z-0">
-            <motion.div
-              initial={{ opacity: 0, rotate: 10 }}
-              whileInView={{ opacity: 1, rotate: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative h-64 w-64 overflow-hidden rounded-full opacity-[0.05] lg:h-96 lg:w-96 lg:opacity-20"
-            >
-              <Image
-                src={chessImg}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 256px, 384px"
-                aria-hidden="true"
-              />
-            </motion.div>
-          </div>
-
-          {/* Imagen del arbol de dinero — hacer crecer tu marca */}
-          <div className="pointer-events-none absolute -left-16 bottom-10 z-0">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-              className="relative h-48 w-40 overflow-hidden rounded-3xl opacity-[0.05] lg:h-64 lg:w-52 lg:opacity-30"
-            >
-              <Image
-                src={growthImg}
-                alt=""
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 160px, 208px"
-                aria-hidden="true"
-              />
-            </motion.div>
-          </div>
 
           <motion.h3
             initial={{ opacity: 0, x: -20 }}
@@ -257,49 +247,56 @@ export default function Projects() {
                 }}
                 whileHover={{
                   y: -8,
-                  boxShadow: "0 24px 60px rgba(0,0,0,0.18)",
+                  boxShadow: "0 24px 60px rgba(0,0,0,0.25)",
                 }}
-                className="group relative overflow-hidden rounded-2xl"
+                className="group relative overflow-hidden rounded-2xl cursor-pointer"
+                onClick={() => c.video && setActiveVideo({ src: c.video, name: c.name, tags: c.tags })}
               >
-                {/* Gradiente oscuro como fondo de la tarjeta */}
+                {/* Video area */}
                 <div
-                  className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br ${CARD_GRADIENTS[i % CARD_GRADIENTS.length]}`}
+                  className="relative aspect-[9/16] sm:aspect-[3/4] overflow-hidden"
                 >
-                  {/* Large letter decoration */}
-                  <motion.span
-                    className="text-8xl font-black text-white/10 select-none"
-                    whileHover={{ scale: 1.2, rotate: -5 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                  >
-                    {c.name.charAt(0)}
-                  </motion.span>
+                  {/* Video siempre visible como fondo de la tarjeta */}
+                  {c.video && (
+                    <video
+                      src={c.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )}
 
-                  {/* Subtle dot grid */}
-                  <div
-                    className="absolute inset-0 opacity-10"
-                    style={{
-                      backgroundImage:
-                        "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
-                      backgroundSize: "24px 24px",
-                    }}
-                  />
+                  {/* Gradiente cinematico inferior para legibilidad del texto */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                  {/* Overlay que aparece al pasar el mouse con texto "Ver proyecto" */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/0 transition-colors duration-400 group-hover:bg-black/50">
-                    <span className="text-xs font-semibold tracking-[0.3em] text-white uppercase opacity-0 transition-all duration-300 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
-                      {viewProjectText}
-                    </span>
-                    <div className="mt-2 h-px w-8 bg-white/60 opacity-0 transition-all duration-300 group-hover:opacity-100 scale-x-0 group-hover:scale-x-100" />
+                  {/* Overlay hover — oscurece + muestra boton play */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-500 group-hover:bg-black/30">
+                    <motion.div
+                      className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/70 bg-white/10 opacity-0 backdrop-blur-sm transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 scale-75"
+                      whileHover={{ scale: 1.15 }}
+                    >
+                      <svg
+                        className="ml-1 h-6 w-6 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </motion.div>
                   </div>
-                </div>
 
-                <div className="bg-white p-6">
-                  <h4 className="mb-1 text-base font-bold tracking-tight text-foreground">
-                    {c.name}
-                  </h4>
-                  <p className="text-xs font-medium tracking-wide text-neutral-400 uppercase">
-                    {c.tags}
-                  </p>
+                  {/* Info del proyecto superpuesta abajo */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <h4 className="mb-1 text-lg font-bold tracking-tight text-white drop-shadow-lg">
+                      {c.name}
+                    </h4>
+                    <p className="flex items-center gap-2 text-xs font-medium tracking-wide text-white/70 uppercase">
+                      <span className="inline-block h-px w-4 bg-white/40" />
+                      {c.tags}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -307,5 +304,69 @@ export default function Projects() {
         </div>
       </div>
     </section>
+
+      {/* ===== LIGHTBOX / MODAL DE VIDEO CON SONIDO ===== */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            key="video-lightbox"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md"
+            onClick={() => setActiveVideo(null)}
+          >
+            {/* Contenedor del video */}
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="relative w-[90vw] max-w-md"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Boton cerrar */}
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="absolute -top-12 right-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:text-white hover:scale-110"
+                aria-label="Cerrar video"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Video con controles nativos y sonido */}
+              <div className="overflow-hidden rounded-2xl shadow-2xl">
+                <video
+                  ref={modalVideoRef}
+                  src={activeVideo.src}
+                  autoPlay
+                  controls
+                  playsInline
+                  className="h-auto max-h-[80vh] w-full object-contain"
+                />
+              </div>
+
+              {/* Info del proyecto debajo del video */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+                className="mt-4 text-center"
+              >
+                <h3 className="text-lg font-bold tracking-tight text-white">
+                  {activeVideo.name}
+                </h3>
+                <p className="mt-1 text-xs font-medium tracking-wide text-white/50 uppercase">
+                  {activeVideo.tags}
+                </p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
