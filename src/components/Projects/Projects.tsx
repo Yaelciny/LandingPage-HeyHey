@@ -5,12 +5,13 @@
 // ============================================================
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { projectsSection } from "@/data/nat";
 import puzzleImg from "@/assets/otro/manos-armando-rompecabezas.png";
-// Removed unused image imports (chessImg, growthImg) after user deleted decorative images
+import chessImg from "@/assets/otro/piezas-ajedrez.jpg";
+import growthImg from "@/assets/otro/regando-arbol-dinero.png";
 
 // Paletas de gradiente oscuro para las tarjetas de casos de exito
 const CARD_GRADIENTS = [
@@ -18,13 +19,6 @@ const CARD_GRADIENTS = [
   "from-zinc-900 via-zinc-800 to-stone-700",
   "from-neutral-900 via-neutral-800 to-neutral-700",
 ];
-
-// Tipo para el video activo en el lightbox
-interface ActiveVideo {
-  src: string;
-  name: string;
-  tags: string;
-}
 
 export default function Projects() {
   // Desestructurar datos de proyectos desde el archivo centralizado
@@ -38,28 +32,6 @@ export default function Projects() {
     viewProjectText,
   } = projectsSection;
 
-  // Estado para el lightbox de video
-  const [activeVideo, setActiveVideo] = useState<ActiveVideo | null>(null);
-  const modalVideoRef = useRef<HTMLVideoElement>(null);
-
-  // Cerrar modal con Escape
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Escape") setActiveVideo(null);
-  }, []);
-
-  useEffect(() => {
-    if (activeVideo) {
-      document.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [activeVideo, handleKeyDown]);
-
   // Refs para animar el proceso y los casos solo cuando son visibles
   const processRef = useRef(null);
   const processInView = useInView(processRef, { once: true, amount: 0.3 });
@@ -68,7 +40,6 @@ export default function Projects() {
   const casesInView = useInView(casesRef, { once: true, amount: 0.2 });
 
   return (
-    <>
     <section
       id="proyectos"
       className="relative overflow-hidden bg-background py-28 lg:py-36"
@@ -223,7 +194,6 @@ export default function Projects() {
 
         {/* Cases — con imagen de ajedrez y arbol de crecimiento */}
         <div ref={casesRef} className="relative">
-
           <motion.h3
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -250,7 +220,6 @@ export default function Projects() {
                   boxShadow: "0 24px 60px rgba(0,0,0,0.25)",
                 }}
                 className="group relative overflow-hidden rounded-2xl cursor-pointer"
-                onClick={() => c.video && setActiveVideo({ src: c.video, name: c.name, tags: c.tags })}
               >
                 {/* Video area */}
                 <div
@@ -304,69 +273,5 @@ export default function Projects() {
         </div>
       </div>
     </section>
-
-      {/* ===== LIGHTBOX / MODAL DE VIDEO CON SONIDO ===== */}
-      <AnimatePresence>
-        {activeVideo && (
-          <motion.div
-            key="video-lightbox"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md"
-            onClick={() => setActiveVideo(null)}
-          >
-            {/* Contenedor del video */}
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative w-[90vw] max-w-md"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Boton cerrar */}
-              <button
-                onClick={() => setActiveVideo(null)}
-                className="absolute -top-12 right-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:text-white hover:scale-110"
-                aria-label="Cerrar video"
-              >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              {/* Video con controles nativos y sonido */}
-              <div className="overflow-hidden rounded-2xl shadow-2xl">
-                <video
-                  ref={modalVideoRef}
-                  src={activeVideo.src}
-                  autoPlay
-                  controls
-                  playsInline
-                  className="h-auto max-h-[80vh] w-full object-contain"
-                />
-              </div>
-
-              {/* Info del proyecto debajo del video */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
-                className="mt-4 text-center"
-              >
-                <h3 className="text-lg font-bold tracking-tight text-white">
-                  {activeVideo.name}
-                </h3>
-                <p className="mt-1 text-xs font-medium tracking-wide text-white/50 uppercase">
-                  {activeVideo.tags}
-                </p>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
   );
 }
